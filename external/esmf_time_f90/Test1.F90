@@ -1,11 +1,11 @@
 !
-! Sub-system tests for esmf_time_f90
+! Sub-system tests for myesmf_time_f90
 !
 ! Someday, switch over to funit!  
 !
 
 MODULE my_tests
-  USE ESMF_Mod
+  USE MYESMF_Mod
   IMPLICIT NONE
 
   ! Set this to .TRUE. to make wrf_error_fatal3() print a message on failure 
@@ -15,7 +15,7 @@ MODULE my_tests
 
 CONTAINS
 
-  ! Test printing of an ESMF_Time or ESMF_TimeInterval object.  
+  ! Test printing of an MYESMF_Time or MYESMF_TimeInterval object.  
   !
   ! Correct results are also passed in through this interface and compared 
   ! with computed results.  PASS/FAIL messages are printed.  
@@ -64,9 +64,9 @@ CONTAINS
     CHARACTER (LEN=512) :: itestname
     LOGICAL :: iexpect_error
     INTEGER rc
-    TYPE(ESMF_Time)           :: t
-    TYPE(ESMF_TimeInterval)   :: ti
-    CHARACTER(LEN=ESMF_MAXSTR) :: str, computed_str, frac_str
+    TYPE(MYESMF_Time)           :: t
+    TYPE(MYESMF_TimeInterval)   :: ti
+    CHARACTER(LEN=MYESMF_MAXSTR) :: str, computed_str, frac_str
     CHARACTER(LEN=17) :: type_str
     INTEGER :: res_len, computed_len, Sn, Sd
     LOGICAL :: test_passed
@@ -131,38 +131,38 @@ CONTAINS
     Sn = 0
     Sd = 0
     IF ( is_t ) THEN
-      type_str = 'ESMF_Time'
-!PRINT *,'DEBUG:  test_print():  calling ESMF_TimeSet()'
+      type_str = 'MYESMF_Time'
+!PRINT *,'DEBUG:  test_print():  calling MYESMF_TimeSet()'
 !PRINT *,'DEBUG:  test_print():  YY,MM,DD,H,M,S,Sn,Sd = ', it_YY,it_MM,it_DD,it_H,it_M,it_S,it_Sn,it_Sd
-      CALL ESMF_TimeSet( t, YY=it_YY, MM=it_MM, DD=it_DD , &
+      CALL MYESMF_TimeSet( t, YY=it_YY, MM=it_MM, DD=it_DD , &
                              H=it_H, M=it_M, S=it_S, Sn=it_Sn, Sd=it_Sd, rc=rc )
-!PRINT *,'DEBUG:  test_print():  back from ESMF_TimeSet()'
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeSet() ', &
+!PRINT *,'DEBUG:  test_print():  back from MYESMF_TimeSet()'
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeSet() ', &
                              __FILE__ , &
                              __LINE__  )
-!PRINT *,'DEBUG:  test_print():  calling ESMF_TimeGet()'
-      CALL ESMF_TimeGet( t, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+!PRINT *,'DEBUG:  test_print():  calling MYESMF_TimeGet()'
+      CALL MYESMF_TimeGet( t, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
-!PRINT *,'DEBUG:  test_print():  back from ESMF_TimeGet(), computed_str = ',TRIM(computed_str)
+!PRINT *,'DEBUG:  test_print():  back from MYESMF_TimeGet(), computed_str = ',TRIM(computed_str)
     ELSE
-      type_str = 'ESMF_TimeInterval'
-!PRINT *,'DEBUG:  test_print():  calling ESMF_TimeIntervalSet()'
-      CALL ESMF_TimeIntervalSet( ti, YY=iti_YY, MM=iti_MM, &
+      type_str = 'MYESMF_TimeInterval'
+!PRINT *,'DEBUG:  test_print():  calling MYESMF_TimeIntervalSet()'
+      CALL MYESMF_TimeIntervalSet( ti, YY=iti_YY, MM=iti_MM, &
                                       D=iti_DD ,           &
                                       H=iti_H, M=iti_M,    &
                                       S=iti_S, Sn=iti_Sn, Sd=iti_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeIntervalSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeIntervalSet() ', &
                              __FILE__ , &
                              __LINE__  )
-!PRINT *,'DEBUG:  test_print():  calling ESMF_TimeIntervalGet()'
-      CALL ESMF_TimeIntervalGet( ti, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+!PRINT *,'DEBUG:  test_print():  calling MYESMF_TimeIntervalGet()'
+      CALL MYESMF_TimeIntervalGet( ti, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
     ENDIF
@@ -203,16 +203,16 @@ CONTAINS
 
 
 
-  ! Test the following arithmetic operations on ESMF_Time and 
-  ! ESMF_TimeInterval objects:
-  !  ESMF_Time         = ESMF_Time         + ESMF_TimeInterval
-  !  ESMF_Time         = ESMF_TimeInterval + ESMF_Time
-  !  ESMF_Time         = ESMF_Time         - ESMF_TimeInterval
-  !  ESMF_TimeInterval = ESMF_Time         - ESMF_Time        
-  !  ESMF_TimeInterval = ESMF_TimeInterval + ESMF_TimeInterval
-  !  ESMF_TimeInterval = ESMF_TimeInterval - ESMF_TimeInterval
-  !  ESMF_TimeInterval = ESMF_TimeInterval * INTEGER
-  !  ESMF_TimeInterval = ESMF_TimeInterval / INTEGER
+  ! Test the following arithmetic operations on MYESMF_Time and 
+  ! MYESMF_TimeInterval objects:
+  !  MYESMF_Time         = MYESMF_Time         + MYESMF_TimeInterval
+  !  MYESMF_Time         = MYESMF_TimeInterval + MYESMF_Time
+  !  MYESMF_Time         = MYESMF_Time         - MYESMF_TimeInterval
+  !  MYESMF_TimeInterval = MYESMF_Time         - MYESMF_Time        
+  !  MYESMF_TimeInterval = MYESMF_TimeInterval + MYESMF_TimeInterval
+  !  MYESMF_TimeInterval = MYESMF_TimeInterval - MYESMF_TimeInterval
+  !  MYESMF_TimeInterval = MYESMF_TimeInterval * INTEGER
+  !  MYESMF_TimeInterval = MYESMF_TimeInterval / INTEGER
   !
   ! Correct results are also passed in through this interface and compared 
   ! with computed results.  PASS/FAIL messages are printed.  
@@ -344,9 +344,9 @@ CONTAINS
     LOGICAL :: iexpect_error
     INTEGER :: rc
     INTEGER :: computed_int, Sn, Sd
-    TYPE(ESMF_Time)           :: op1_t , op2_t , res_t, computed_t
-    TYPE(ESMF_TimeInterval)   :: op1_ti, op2_ti, res_ti, computed_ti
-    CHARACTER(LEN=ESMF_MAXSTR) :: str, op1_str, op2_str, res_str, computed_str, frac_str
+    TYPE(MYESMF_Time)           :: op1_t , op2_t , res_t, computed_t
+    TYPE(MYESMF_TimeInterval)   :: op1_ti, op2_ti, res_ti, computed_ti
+    CHARACTER(LEN=MYESMF_MAXSTR) :: str, op1_str, op2_str, res_str, computed_str, frac_str
     CHARACTER(LEN=1) :: op_str
     CHARACTER(LEN=17) :: op1_type_str, op2_type_str, res_type_str
 
@@ -526,34 +526,34 @@ CONTAINS
 
     ! Initialize op1
     IF ( op1_is_t ) THEN
-      op1_type_str = 'ESMF_Time'
-      CALL ESMF_TimeSet( op1_t, YY=iop1_t_YY, MM=iop1_t_MM, DD=iop1_t_DD , &
+      op1_type_str = 'MYESMF_Time'
+      CALL MYESMF_TimeSet( op1_t, YY=iop1_t_YY, MM=iop1_t_MM, DD=iop1_t_DD , &
                                  H=iop1_t_H, M=iop1_t_M, S=iop1_t_S, Sn=iop1_t_Sn, Sd=iop1_t_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeGet( op1_t, timeString=op1_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( op1_t, timeString=op1_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
       CALL fraction_to_string( Sn, Sd, frac_str )
       op1_str = TRIM(op1_str)//TRIM(frac_str)
     ELSE
-      op1_type_str = 'ESMF_TimeInterval'
-      CALL ESMF_TimeIntervalSet( op1_ti, YY=iop1_ti_YY, MM=iop1_ti_MM, &
+      op1_type_str = 'MYESMF_TimeInterval'
+      CALL MYESMF_TimeIntervalSet( op1_ti, YY=iop1_ti_YY, MM=iop1_ti_MM, &
                                           D=iop1_ti_DD ,               &
                                           H=iop1_ti_H, M=iop1_ti_M,    &
                                           S=iop1_ti_S, Sn=iop1_ti_Sn, Sd=iop1_ti_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeIntervalSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeIntervalSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeIntervalGet( op1_ti, timeString=op1_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeIntervalGet( op1_ti, timeString=op1_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
@@ -562,34 +562,34 @@ CONTAINS
     ENDIF
     ! Initialize op2
     IF ( op2_is_t ) THEN
-      op2_type_str = 'ESMF_Time'
-      CALL ESMF_TimeSet( op2_t, YY=iop2_t_YY, MM=iop2_t_MM, DD=iop2_t_DD , &
+      op2_type_str = 'MYESMF_Time'
+      CALL MYESMF_TimeSet( op2_t, YY=iop2_t_YY, MM=iop2_t_MM, DD=iop2_t_DD , &
                                  H=iop2_t_H, M=iop2_t_M, S=iop2_t_S, Sn=iop2_t_Sn, Sd=iop2_t_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeGet( op2_t, timeString=op2_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( op2_t, timeString=op2_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
       CALL fraction_to_string( Sn, Sd, frac_str )
       op2_str = TRIM(op2_str)//TRIM(frac_str)
     ELSE IF ( op2_is_ti ) THEN
-      op2_type_str = 'ESMF_TimeInterval'
-      CALL ESMF_TimeIntervalSet( op2_ti, YY=iop2_ti_YY, MM=iop2_ti_MM, &
+      op2_type_str = 'MYESMF_TimeInterval'
+      CALL MYESMF_TimeIntervalSet( op2_ti, YY=iop2_ti_YY, MM=iop2_ti_MM, &
                                           D=iop2_ti_DD ,               &
                                           H=iop2_ti_H, M=iop2_ti_M,    &
                                           S=iop2_ti_S, Sn=iop2_ti_Sn, Sd=iop2_ti_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeIntervalSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeIntervalSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeIntervalGet( op2_ti, timeString=op2_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeIntervalGet( op2_ti, timeString=op2_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
@@ -604,35 +604,35 @@ CONTAINS
       ENDIF
     ENDIF
     ! Initialize res
-    IF ( res_is_t ) THEN  ! result is ESMF_Time
-      res_type_str = 'ESMF_Time'
-      CALL ESMF_TimeSet( res_t, YY=ires_t_YY, MM=ires_t_MM, DD=ires_t_DD , &
+    IF ( res_is_t ) THEN  ! result is MYESMF_Time
+      res_type_str = 'MYESMF_Time'
+      CALL MYESMF_TimeSet( res_t, YY=ires_t_YY, MM=ires_t_MM, DD=ires_t_DD , &
                                  H=ires_t_H, M=ires_t_M, S=ires_t_S, Sn=ires_t_Sn, Sd=ires_t_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeGet( res_t, timeString=res_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( res_t, timeString=res_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
       CALL fraction_to_string( Sn, Sd, frac_str )
       res_str = TRIM(res_str)//TRIM(frac_str)
-    ELSE IF ( res_is_ti ) THEN  ! result is ESMF_TimeInterval
-      res_type_str = 'ESMF_TimeInterval'
-      CALL ESMF_TimeIntervalSet( res_ti, YY=ires_ti_YY, MM=ires_ti_MM, &
+    ELSE IF ( res_is_ti ) THEN  ! result is MYESMF_TimeInterval
+      res_type_str = 'MYESMF_TimeInterval'
+      CALL MYESMF_TimeIntervalSet( res_ti, YY=ires_ti_YY, MM=ires_ti_MM, &
                                           D=ires_ti_DD ,               &
                                           H=ires_ti_H, M=ires_ti_M,    &
                                           S=ires_ti_S, Sn=ires_ti_Sn, Sd=ires_ti_Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                             TRIM(itestname)//'ESMF_TimeIntervalSet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                             TRIM(itestname)//'MYESMF_TimeIntervalSet() ', &
                              __FILE__ , &
                              __LINE__  )
-      CALL ESMF_TimeIntervalGet( res_ti, timeString=res_str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeIntervalGet( res_ti, timeString=res_str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       ! handle fractions
@@ -654,19 +654,19 @@ CONTAINS
     ! add
     IF ( iadd_op ) THEN
       op_str = '+'
-      IF ( res_is_t ) THEN  ! result is ESMF_Time
+      IF ( res_is_t ) THEN  ! result is MYESMF_Time
         IF ( op1_is_t .AND. op2_is_ti ) THEN
-          !  ESMF_Time         = ESMF_Time         + ESMF_TimeInterval
+          !  MYESMF_Time         = MYESMF_Time         + MYESMF_TimeInterval
           computed_t = op1_t + op2_ti
         ELSE IF ( op1_is_ti .AND. op2_is_t ) THEN
-          !  ESMF_Time         = ESMF_TimeInterval + ESMF_Time
+          !  MYESMF_Time         = MYESMF_TimeInterval + MYESMF_Time
           computed_t = op1_ti + op2_t
         ELSE
           unsupported_op = .TRUE.
         ENDIF
-      ELSE  ! result is ESMF_TimeInterval
+      ELSE  ! result is MYESMF_TimeInterval
         IF ( op1_is_ti .AND. op2_is_ti ) THEN
-          !  ESMF_TimeInterval = ESMF_TimeInterval + ESMF_TimeInterval
+          !  MYESMF_TimeInterval = MYESMF_TimeInterval + MYESMF_TimeInterval
           computed_ti = op1_ti + op2_ti
         ELSE
           unsupported_op = .TRUE.
@@ -675,19 +675,19 @@ CONTAINS
     ! subtract
     ELSE  IF ( isubtract_op ) THEN
       op_str = '-'
-      IF ( res_is_t ) THEN  ! result is ESMF_Time
+      IF ( res_is_t ) THEN  ! result is MYESMF_Time
         IF ( op1_is_t .AND. op2_is_ti ) THEN
-          !  ESMF_Time         = ESMF_Time         - ESMF_TimeInterval
+          !  MYESMF_Time         = MYESMF_Time         - MYESMF_TimeInterval
           computed_t = op1_t - op2_ti
         ELSE
           unsupported_op = .TRUE.
         ENDIF
-      ELSE  ! result is ESMF_TimeInterval
+      ELSE  ! result is MYESMF_TimeInterval
         IF ( op1_is_t .AND. op2_is_t ) THEN
-          !  ESMF_TimeInterval = ESMF_Time         - ESMF_Time        
+          !  MYESMF_TimeInterval = MYESMF_Time         - MYESMF_Time        
           computed_ti = op1_t - op2_t
         ELSE IF ( op1_is_ti .AND. op2_is_ti ) THEN
-          !  ESMF_TimeInterval = ESMF_TimeInterval - ESMF_TimeInterval
+          !  MYESMF_TimeInterval = MYESMF_TimeInterval - MYESMF_TimeInterval
           computed_ti = op1_ti - op2_ti
         ELSE
           unsupported_op = .TRUE.
@@ -695,9 +695,9 @@ CONTAINS
       ENDIF
     ELSE  IF ( imultiply_op ) THEN
       op_str = '*'
-      IF ( res_is_ti ) THEN  ! result is ESMF_TimeInterval
+      IF ( res_is_ti ) THEN  ! result is MYESMF_TimeInterval
         IF ( op1_is_ti .AND. op2_is_int ) THEN
-          !  ESMF_TimeInterval = ESMF_TimeInterval * INTEGER
+          !  MYESMF_TimeInterval = MYESMF_TimeInterval * INTEGER
           computed_ti = op1_ti * op2_int
         ELSE
           unsupported_op = .TRUE.
@@ -705,18 +705,18 @@ CONTAINS
       ENDIF
     ELSE  IF ( idivide_op ) THEN
       op_str = '/'
-      IF ( res_is_ti ) THEN  ! result is ESMF_TimeInterval
+      IF ( res_is_ti ) THEN  ! result is MYESMF_TimeInterval
         IF ( op1_is_ti .AND. op2_is_int ) THEN
-          !  ESMF_TimeInterval = ESMF_TimeInterval / INTEGER
+          !  MYESMF_TimeInterval = MYESMF_TimeInterval / INTEGER
           computed_ti = op1_ti / op2_int
         ELSE
           unsupported_op = .TRUE.
         ENDIF
       ELSE IF ( res_is_int ) THEN  ! result is INTEGER
         IF ( op1_is_ti .AND. op2_is_ti ) THEN
-          !  INTEGER = ESMF_TimeInterval / ESMF_TimeInterval
+          !  INTEGER = MYESMF_TimeInterval / MYESMF_TimeInterval
           ! number of whole time intervals
-          computed_int = ESMF_TimeIntervalDIVQuot( op1_ti , op2_ti )
+          computed_int = MYESMF_TimeIntervalDIVQuot( op1_ti , op2_ti )
         ELSE
           unsupported_op = .TRUE.
         ENDIF
@@ -734,26 +734,26 @@ CONTAINS
 
     ! check result
     test_passed = .FALSE.
-    IF ( res_is_t ) THEN  ! result is ESMF_Time
+    IF ( res_is_t ) THEN  ! result is MYESMF_Time
       IF ( computed_t == res_t ) THEN
         test_passed = .TRUE.
       ELSE
-        CALL ESMF_TimeGet( computed_t, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
-        CALL test_check_error( ESMF_SUCCESS, rc, &
-                              TRIM(itestname)//'ESMF_TimeGet() ', &
+        CALL MYESMF_TimeGet( computed_t, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
+        CALL test_check_error( MYESMF_SUCCESS, rc, &
+                              TRIM(itestname)//'MYESMF_TimeGet() ', &
                               __FILE__ , &
                               __LINE__  )
         ! handle fractions
         CALL fraction_to_string( Sn, Sd, frac_str )
         computed_str = TRIM(computed_str)//TRIM(frac_str)
       ENDIF
-    ELSE IF ( res_is_ti ) THEN  ! result is ESMF_TimeInterval
+    ELSE IF ( res_is_ti ) THEN  ! result is MYESMF_TimeInterval
       IF ( computed_ti == res_ti ) THEN
         test_passed = .TRUE.
       ELSE
-        CALL ESMF_TimeIntervalGet( computed_ti, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
-        CALL test_check_error( ESMF_SUCCESS, rc, &
-                              TRIM(itestname)//'ESMF_TimeGet() ', &
+        CALL MYESMF_TimeIntervalGet( computed_ti, timeString=computed_str, Sn=Sn, Sd=Sd, rc=rc )
+        CALL test_check_error( MYESMF_SUCCESS, rc, &
+                              TRIM(itestname)//'MYESMF_TimeGet() ', &
                               __FILE__ , &
                               __LINE__  )
         ! handle fractions
@@ -840,13 +840,13 @@ CONTAINS
     INTEGER :: iincrement_Sd
     INTEGER :: Sn, Sd
     INTEGER rc
-    TYPE(ESMF_Time)           :: start_time, stop_time, current_time
-    TYPE(ESMF_Clock), POINTER :: domain_clock
-    TYPE(ESMF_TimeInterval)   :: timestep, increment
-    TYPE(ESMF_Time)           :: add_time, subtract_time
+    TYPE(MYESMF_Time)           :: start_time, stop_time, current_time
+    TYPE(MYESMF_Clock), POINTER :: domain_clock
+    TYPE(MYESMF_TimeInterval)   :: timestep, increment
+    TYPE(MYESMF_Time)           :: add_time, subtract_time
     INTEGER :: itimestep
-    REAL(ESMF_KIND_R8) :: dayr8
-    CHARACTER(LEN=ESMF_MAXSTR) :: str, frac_str
+    REAL(MYESMF_KIND_R8) :: dayr8
+    CHARACTER(LEN=MYESMF_MAXSTR) :: str, frac_str
 
     istart_YY = 0
     istart_MM = 1
@@ -896,45 +896,45 @@ CONTAINS
 
     ! Initialize start time, stop time, time step, clock for simple case. 
     itestfullname = TRIM(itestname)//'SETUP'
-    CALL ESMF_TimeSet( start_time, YY=istart_YY, MM=istart_MM, DD=istart_DD , &
+    CALL MYESMF_TimeSet( start_time, YY=istart_YY, MM=istart_MM, DD=istart_DD , &
                                    H=istart_H, M=istart_M, S=istart_S, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeSet() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeSet() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_TimeGet( start_time, timeString=str, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( start_time, timeString=str, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  start_time = <',TRIM(str),'>'
 
-    CALL ESMF_TimeSet( stop_time, YY=istop_YY, MM=istop_MM, DD=istop_DD , &
+    CALL MYESMF_TimeSet( stop_time, YY=istop_YY, MM=istop_MM, DD=istop_DD , &
                                    H=istop_H, M=istop_M, S=istop_S, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeSet() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeSet() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_TimeGet( stop_time, timeString=str, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( stop_time, timeString=str, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  stop_time = <',TRIM(str),'>'
 
-    CALL ESMF_TimeIntervalSet( timestep, D=itimestep_D, H=itimestep_H, &
+    CALL MYESMF_TimeIntervalSet( timestep, D=itimestep_D, H=itimestep_H, &
                                          M=itimestep_M, S=itimestep_S, &
                                          Sn=itimestep_Sn, Sd=itimestep_Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeIntervalSet() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeIntervalSet() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_TimeIntervalGet( timestep, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeIntervalGet() ', &
+    CALL MYESMF_TimeIntervalGet( timestep, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeIntervalGet() ', &
                           __FILE__ , &
                           __LINE__  )
     ! handle fractions
@@ -942,16 +942,16 @@ CONTAINS
     str = TRIM(str)//TRIM(frac_str)
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  timestep = <',TRIM(str),'>'
 
-    CALL ESMF_TimeIntervalSet( increment, S=iincrement_S, &
+    CALL MYESMF_TimeIntervalSet( increment, S=iincrement_S, &
                                Sn=iincrement_Sn, Sd=iincrement_Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeIntervalSet() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeIntervalSet() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_TimeIntervalGet( increment, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeIntervalGet() ', &
+    CALL MYESMF_TimeIntervalGet( increment, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeIntervalGet() ', &
                           __FILE__ , &
                           __LINE__  )
     ! handle fractions
@@ -960,42 +960,42 @@ CONTAINS
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  increment = <',TRIM(str),'>'
 
     ALLOCATE( domain_clock )
-    domain_clock = ESMF_ClockCreate( TimeStep= timestep,  &
+    domain_clock = MYESMF_ClockCreate( TimeStep= timestep,  &
                                      StartTime=start_time, &
                                      StopTime= stop_time,  &
                                      rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_ClockCreate() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_ClockCreate() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_ClockGet( domain_clock, CurrTime=current_time, &
+    CALL MYESMF_ClockGet( domain_clock, CurrTime=current_time, &
                         rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_ClockGet() ', &
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_ClockGet() ', &
                           __FILE__ , &
                           __LINE__  )
 
-    CALL ESMF_TimeGet( current_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( current_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     CALL fraction_to_string( Sn, Sd, frac_str )
     str = TRIM(str)//TRIM(frac_str)
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  clock current_time = <',TRIM(str),'>'
 
-    CALL ESMF_TimeGet( current_time, dayOfYear_r8=dayr8, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( current_time, dayOfYear_r8=dayr8, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     WRITE(*,FMT='(A,A,F10.6,A)') TRIM(itestfullname),':  current_time dayOfYear_r8 = < ',dayr8,' >'
 
     subtract_time = current_time - increment
-    CALL ESMF_TimeGet( subtract_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( subtract_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     CALL fraction_to_string( Sn, Sd, frac_str )
@@ -1003,9 +1003,9 @@ CONTAINS
     WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  current_time-increment = <',TRIM(str),'>'
 
     add_time = current_time + increment
-    CALL ESMF_TimeGet( add_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-    CALL test_check_error( ESMF_SUCCESS, rc, &
-                          TRIM(itestfullname)//'ESMF_TimeGet() ', &
+    CALL MYESMF_TimeGet( add_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+    CALL test_check_error( MYESMF_SUCCESS, rc, &
+                          TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                           __FILE__ , &
                           __LINE__  )
     CALL fraction_to_string( Sn, Sd, frac_str )
@@ -1015,29 +1015,29 @@ CONTAINS
     ! Advance clock.  
     itestfullname = TRIM(itestname)//'ADVANCE'
     itimestep = 0
-    DO WHILE ( .NOT. ESMF_ClockIsStopTime(domain_clock ,rc=rc) )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_ClockIsStopTime() ', &
+    DO WHILE ( .NOT. MYESMF_ClockIsStopTime(domain_clock ,rc=rc) )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_ClockIsStopTime() ', &
                             __FILE__ , &
                             __LINE__  )
       itimestep = itimestep + 1
 
-      CALL ESMF_ClockAdvance( domain_clock, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_ClockAdvance() ', &
+      CALL MYESMF_ClockAdvance( domain_clock, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_ClockAdvance() ', &
                             __FILE__ , &
                             __LINE__  )
 
-      CALL ESMF_ClockGet( domain_clock, CurrTime=current_time, &
+      CALL MYESMF_ClockGet( domain_clock, CurrTime=current_time, &
                           rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_ClockGet() ', &
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_ClockGet() ', &
                             __FILE__ , &
                             __LINE__  )
 
-      CALL ESMF_TimeGet( current_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( current_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       CALL fraction_to_string( Sn, Sd, frac_str )
@@ -1046,9 +1046,9 @@ CONTAINS
         itimestep,'  current_time = <',TRIM(str),'>'
 
       subtract_time = current_time - increment
-      CALL ESMF_TimeGet( subtract_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( subtract_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       CALL fraction_to_string( Sn, Sd, frac_str )
@@ -1056,9 +1056,9 @@ CONTAINS
       WRITE(*,FMT='(A,A,A,A)') TRIM(itestfullname),':  current_time-increment = <',TRIM(str),'>'
 
       add_time = current_time + increment
-      CALL ESMF_TimeGet( add_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
-      CALL test_check_error( ESMF_SUCCESS, rc, &
-                            TRIM(itestfullname)//'ESMF_TimeGet() ', &
+      CALL MYESMF_TimeGet( add_time, timeString=str, Sn=Sn, Sd=Sd, rc=rc )
+      CALL test_check_error( MYESMF_SUCCESS, rc, &
+                            TRIM(itestfullname)//'MYESMF_TimeGet() ', &
                             __FILE__ , &
                             __LINE__  )
       CALL fraction_to_string( Sn, Sd, frac_str )
@@ -1171,19 +1171,19 @@ END SUBROUTINE test_check_error
 
 
 PROGRAM time_manager_test
-  USE ESMF_Mod
+  USE MYESMF_Mod
   USE my_tests
   IMPLICIT NONE
   INTEGER :: rc
 
   PRINT *,'BEGIN TEST SUITE'
 
-  CALL ESMF_Initialize( defaultCalendar=ESMF_CAL_GREGORIAN, rc=rc )
-  CALL test_check_error( ESMF_SUCCESS, rc, &
-                        'ESMF_Initialize() ', &
+  CALL MYESMF_Initialize( defaultCalendar=MYESMF_CAL_GREGORIAN, rc=rc )
+  CALL test_check_error( MYESMF_SUCCESS, rc, &
+                        'MYESMF_Initialize() ', &
                         __FILE__ , &
                         __LINE__  )
-!  PRINT *,'DEBUG:  back from ESMF_Initialize(), rc = ',rc
+!  PRINT *,'DEBUG:  back from MYESMF_Initialize(), rc = ',rc
 
 !  CALL test_print(  t_yy,  t_mm,  t_dd,  t_h,  t_m,  t_s, &
 !                   ti_yy, ti_mm, ti_dd, ti_h, ti_m, ti_s, &
@@ -1280,7 +1280,7 @@ PROGRAM time_manager_test
 !    res_str='02002-005-500_002:001:010', testname='printTI_NN3', expect_error=.TRUE. )
 
   ! Addition tests
-  ! ESMF_Time = ESMF_Time + ESMF_TimeInterval
+  ! MYESMF_Time = MYESMF_Time + MYESMF_TimeInterval
   CALL test_arithmetic( add_op=.TRUE.,                                             &
      op1_t_yy=2001,  op1_t_mm=12,  op1_t_dd=3,  op1_t_h=1,  op1_t_m=20,  op1_t_s=10, &
     op2_ti_yy=   0, op2_ti_mm= 0, op2_ti_dd=0, op2_ti_h=3, op2_ti_m=10, op2_ti_s=10, &
@@ -1359,7 +1359,7 @@ PROGRAM time_manager_test
     op2_ti_yy=   0, op2_ti_mm= 0, op2_ti_dd=366, op2_ti_h=22, op2_ti_m=10, op2_ti_s=10, &
      res_t_yy=2005,  res_t_mm=04,  res_t_dd=01,  res_t_h=2,  res_t_m=40,  res_t_s=10, &
     testname='AddT_T_TI15' )
-  ! ESMF_Time = ESMF_Time + ESMF_TimeInterval with fractions
+  ! MYESMF_Time = MYESMF_Time + MYESMF_TimeInterval with fractions
   CALL test_arithmetic( add_op=.TRUE.,                                             &
      op1_t_yy=2004,  op1_t_mm=12,  op1_t_dd=31,  op1_t_h=22,  op1_t_m=30,  op1_t_s=00, &
      op1_t_sn=01,  op1_t_sd=03, &
@@ -1377,7 +1377,7 @@ PROGRAM time_manager_test
 !     res_t_yy=2005,  res_t_mm= 1,  res_t_dd=1,  res_t_h=2,  res_t_m=40,  res_t_s=10, &
 !     res_t_sn=01,  res_t_sd=03, &
 !    testname='AddT_T_TI_F2' )
-  ! ESMF_Time = ESMF_TimeInterval + ESMF_Time
+  ! MYESMF_Time = MYESMF_TimeInterval + MYESMF_Time
   CALL test_arithmetic( add_op=.TRUE.,                                             &
     op1_ti_yy=   0, op1_ti_mm= 0, op1_ti_dd=0, op1_ti_h=3, op1_ti_m=10, op1_ti_s=10, &
      op2_t_yy=2001,  op2_t_mm=12,  op2_t_dd=3,  op2_t_h=1,  op2_t_m=20,  op2_t_s=10, &
@@ -1388,7 +1388,7 @@ PROGRAM time_manager_test
      op2_t_yy=2001,  op2_t_mm=12,  op2_t_dd=31,  op2_t_h=22,  op2_t_m=30,  op2_t_s=00, &
      res_t_yy=2002,  res_t_mm= 1,  res_t_dd=1,  res_t_h=2,  res_t_m=40,  res_t_s=10, &
     testname='AddT_TI_T2' )
-  ! ESMF_TimeInterval = ESMF_TimeInterval + ESMF_TimeInterval
+  ! MYESMF_TimeInterval = MYESMF_TimeInterval + MYESMF_TimeInterval
   CALL test_arithmetic( add_op=.TRUE.,                                             &
     op1_ti_yy=0000, op1_ti_mm=00, op1_ti_dd=3, op1_ti_h=1, op1_ti_m=20, op1_ti_s=10, &
     op2_ti_yy=0000, op2_ti_mm=00, op2_ti_dd=1, op2_ti_h=1, op2_ti_m=10, op2_ti_s=10, &
@@ -1406,7 +1406,7 @@ PROGRAM time_manager_test
     testname='AddTI_TI_TI3' )
 
   ! Subtraction tests
-  ! ESMF_Time = ESMF_Time - ESMF_TimeInterval
+  ! MYESMF_Time = MYESMF_Time - MYESMF_TimeInterval
   CALL test_arithmetic( add_op=.FALSE.,                                            &
      op1_t_yy=2001,  op1_t_mm=12,  op1_t_dd=3,  op1_t_h=1,  op1_t_m=20,  op1_t_s=10, &
     op2_ti_yy=   0, op2_ti_mm= 0, op2_ti_dd=0, op2_ti_h=3, op2_ti_m=10, op2_ti_s=10, &
@@ -1437,7 +1437,7 @@ PROGRAM time_manager_test
     op2_ti_yy=   0, op2_ti_mm= 0, op2_ti_dd=367, op2_ti_h=4, op2_ti_m=10, op2_ti_s=10, &
      res_t_yy=2004,  res_t_mm=12,  res_t_dd=30,  res_t_h=4,  res_t_m=30,  res_t_s=00, &
     testname='SubtractT_T_TI6' )
-  ! ESMF_Time = ESMF_Time - ESMF_TimeInterval with fractions
+  ! MYESMF_Time = MYESMF_Time - MYESMF_TimeInterval with fractions
   CALL test_arithmetic( add_op=.FALSE.,                                             &
      op1_t_yy=2005,  op1_t_mm=01,  op1_t_dd=01,  op1_t_h=00,  op1_t_m=00,  op1_t_s=00, &
      op1_t_sn=00,  op1_t_sd=00, &
@@ -1446,7 +1446,7 @@ PROGRAM time_manager_test
      res_t_yy=2004,  res_t_mm=12,  res_t_dd=31,  res_t_h=23,  res_t_m=59,  res_t_s=58, &
      res_t_sn=02,  res_t_sd=03, &
     testname='SubtractT_T_TI_F1' )
-  ! ESMF_TimeInterval = ESMF_Time - ESMF_Time
+  ! MYESMF_TimeInterval = MYESMF_Time - MYESMF_Time
   CALL test_arithmetic( add_op=.FALSE.,                                            &
      op1_t_yy=2001,  op1_t_mm=12,  op1_t_dd=3,  op1_t_h=1,  op1_t_m=20,  op1_t_s=10, &
      op2_t_yy=2001,  op2_t_mm=12,  op2_t_dd=1,  op2_t_h=1,  op2_t_m=10,  op2_t_s=10, &
@@ -1517,7 +1517,7 @@ PROGRAM time_manager_test
      op2_t_yy=-2002,  op2_t_mm=02,  op2_t_dd=28, op2_t_h=00, op2_t_m=00,  op2_t_s=00, &
     res_ti_yy=0000, res_ti_mm=00, res_ti_dd=0, res_ti_h=0, res_ti_m=00, res_ti_s=00, &
     testname='SubtractTI_T_T14' )
-  ! ESMF_TimeInterval = ESMF_TimeInterval - ESMF_TimeInterval
+  ! MYESMF_TimeInterval = MYESMF_TimeInterval - MYESMF_TimeInterval
   CALL test_arithmetic( add_op=.FALSE.,                                            &
     op1_ti_yy=0000, op1_ti_mm=00, op1_ti_dd=3, op1_ti_h=1, op1_ti_m=20, op1_ti_s=10, &
     op2_ti_yy=0000, op2_ti_mm=00, op2_ti_dd=1, op2_ti_h=1, op2_ti_m=10, op2_ti_s=10, &
@@ -1533,7 +1533,7 @@ PROGRAM time_manager_test
     op2_ti_yy=0000, op2_ti_mm=00, op2_ti_dd=-3, op2_ti_h=-1, op2_ti_m=-20, op2_ti_s=-10, &
     res_ti_yy=0000, res_ti_mm=00, res_ti_dd=2, res_ti_h=0, res_ti_m=10, res_ti_s=00,  &
     testname='SubtractTI_TI_TI3' )
-  ! Negative result ESMF_TimeInterval = ESMF_TimeInterval - ESMF_TimeInterval
+  ! Negative result MYESMF_TimeInterval = MYESMF_TimeInterval - MYESMF_TimeInterval
   CALL test_arithmetic( add_op=.FALSE.,                                            &
     op1_ti_yy=0000, op1_ti_mm=00, op1_ti_dd=1, op1_ti_h=1, op1_ti_m=10, op1_ti_s=10, &
     op2_ti_yy=0000, op2_ti_mm=00, op2_ti_dd=3, op2_ti_h=1, op2_ti_m=20, op2_ti_s=10, &
@@ -1545,7 +1545,7 @@ PROGRAM time_manager_test
     res_ti_yy=0000, res_ti_mm=00, res_ti_dd=-4, res_ti_h=-2, res_ti_m=-30, res_ti_s=-20,  &
     testname='SubtractTI_TI_TIN2' )
 
-  ! Un-normalized ESMF_TimeInterval = ESMF_TimeInterval - ESMF_TimeInterval
+  ! Un-normalized MYESMF_TimeInterval = MYESMF_TimeInterval - MYESMF_TimeInterval
   ! this is an error
 !  CALL test_arithmetic( add_op=.FALSE.,                                            &
 !    op1_ti_yy=2001, op1_ti_mm=11, op1_ti_dd=3, op1_ti_h=1, op1_ti_m=20, op1_ti_s=10, &
@@ -1561,7 +1561,7 @@ PROGRAM time_manager_test
 !    testname='AddTT1' )
 
   ! Multiplication tests
-  ! ESMF_TimeInterval = ESMF_TimeInterval * INTEGER
+  ! MYESMF_TimeInterval = MYESMF_TimeInterval * INTEGER
   CALL test_arithmetic( multiply_op=.TRUE.,                &
     op1_ti_dd=3,  op1_ti_h=12,  op1_ti_m=18,  op1_ti_s=33, &
     op2_int=2,                                             &
@@ -1579,7 +1579,7 @@ PROGRAM time_manager_test
     testname='MultiplyTI_TI_INT3' )
 
   ! Division tests
-  ! ESMF_TimeInterval = ESMF_TimeInterval / INTEGER
+  ! MYESMF_TimeInterval = MYESMF_TimeInterval / INTEGER
   CALL test_arithmetic( multiply_op=.FALSE.,               &
     op1_ti_dd=3,  op1_ti_h=12,  op1_ti_m=18,  op1_ti_s=33, &
     op2_int=3,                                             &
@@ -1596,7 +1596,7 @@ PROGRAM time_manager_test
     op2_int=5,                                             &
     res_ti_s=0, res_ti_sn=7,  res_ti_sd=20,                &
     testname='DivideTI_TI_INT3' )
-  ! INTEGER = ESMF_TimeInterval / ESMF_TimeInterval
+  ! INTEGER = MYESMF_TimeInterval / MYESMF_TimeInterval
   ! this operator truncates to whole integers
   CALL test_arithmetic( multiply_op=.FALSE.,               &
     op1_ti_dd=3,  op1_ti_h=12,  op1_ti_m=18,  op1_ti_s=33, &
@@ -1706,9 +1706,9 @@ PROGRAM time_manager_test
     testname="LeapYearFractionClockAdvance",                                  &
     increment_S=1, increment_Sn=1, increment_Sd=3 )
 
-  CALL ESMF_Finalize( rc=rc )
-  CALL test_check_error( ESMF_SUCCESS, rc, &
-                        'ESMF_Finalize() ', &
+  CALL MYESMF_Finalize( rc=rc )
+  CALL test_check_error( MYESMF_SUCCESS, rc, &
+                        'MYESMF_Finalize() ', &
                         __FILE__ , &
                         __LINE__  )
 

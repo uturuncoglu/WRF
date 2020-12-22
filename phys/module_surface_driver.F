@@ -355,6 +355,7 @@ CONTAINS
    USE module_sf_tmnupdate
    USE module_sf_lake
    USE module_cpl, ONLY : coupler_on, cpl_rcv
+   USE module_drv, ONLY : drv_on, drv_rcv
 !
 !  This driver calls subroutines for the surface parameterizations.
 !
@@ -1369,6 +1370,16 @@ CONTAINS
         &              ips, ipe, jps, jpe, kps, kpe, &
         &              max_edom, cplmask, VOCE )
      
+  END IF
+
+  IF ( drv_on ) THEN
+
+     CALL drv_rcv( id, 'SST',            &
+        &              ids, ide, jds, jde, kds, kde, &
+        &              ims, ime, jms, jme, kms, kme, &
+        &              ips, ipe, jps, jpe, kps, kpe, &
+        &              max_edom, SST, SST_INPUT )
+
   END IF
   
 !$OMP PARALLEL DO &

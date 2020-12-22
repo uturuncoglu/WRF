@@ -5,7 +5,7 @@ FFLAGS  =  $(OPTS)
 LIBS    = 
 M4      = m4 -Uinclude -Uindex -Ulen
 AR      = ar
-CFLAGS = 
+CFLAGS =
 CPPFLAGS =
 FFLAGS =
 

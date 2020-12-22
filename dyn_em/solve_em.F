@@ -75,6 +75,7 @@ SUBROUTINE solve_em ( grid , config_flags  &
    USE module_llxy, ONLY : proj_cassini
    USE module_avgflx_em, ONLY : zero_avgflx, upd_avgflx
    USE module_cpl, ONLY : coupler_on, cpl_settime, cpl_store_input
+   USE module_drv, ONLY : drv_on, drv_store_input
 
    IMPLICIT NONE
 
@@ -301,6 +302,7 @@ SUBROUTINE solve_em ( grid , config_flags  &
    grid%dtbc = grid%dtbc + grid%dt
 
    IF( coupler_on ) CALL cpl_store_input( grid, config_flags )
+   IF( drv_on ) CALL drv_store_input( grid, config_flags )
 
    IF (config_flags%polar) dclat = 90./REAL(jde-jds) !(0.5 * 180/ny)
 
@@ -4596,9 +4598,11 @@ BENCH_END(bc_2d_tim)
    CALL wrf_debug ( 200 , ' call end of solve_em' )
 
 !  Are we about to read SST input from the wrflowinput file?  That data is saved
-!  for use in fractional merging of external/coupled SST and input SST. 
+!  for use in fractional merging of external/coupled SST and input SST.
    IF ( coupler_on )   grid%just_read_auxinput4 = Is_alarm_tstep(grid%domain_clock, grid%alarms(AUXINPUT4_ALARM))
-
+! ALESS (
+   IF ( drv_on )       grid%just_read_auxinput4 = Is_alarm_tstep(grid%domain_clock, grid%alarms(AUXINPUT4_ALARM))
+! ALESS )
 !  Are we about to read the lateral boundary file?  This is a domain one action only.
    IF ( grid%id .EQ. 1 ) grid%just_read_boundary = Is_alarm_tstep(grid%domain_clock, grid%alarms(BOUNDARY_ALARM))
 

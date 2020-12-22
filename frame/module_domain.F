@@ -2032,17 +2032,17 @@ CONTAINS
         is_stop_subtime = .FALSE.
         CALL domain_clock_get( grid, time_step=timeStep, &
                                      current_time=currentTime )
-        positive_timestep = ESMF_TimeIntervalIsPositive( timeStep )
+        positive_timestep = MYESMF_TimeIntervalIsPositive( timeStep )
         IF ( positive_timestep ) THEN
 ! hack for bug in PGI 5.1-x
 !        IF ( currentTime .GE. grid%stop_subtime ) THEN
-          IF ( ESMF_TimeGE( currentTime, grid%stop_subtime ) ) THEN
+          IF ( MYESMF_TimeGE( currentTime, grid%stop_subtime ) ) THEN
             is_stop_subtime = .TRUE.
           ENDIF
         ELSE
 ! hack for bug in PGI 5.1-x
 !        IF ( currentTime .LE. grid%stop_subtime ) THEN
-          IF ( ESMF_TimeLE( currentTime, grid%stop_subtime ) ) THEN
+          IF ( MYESMF_TimeLE( currentTime, grid%stop_subtime ) ) THEN
             is_stop_subtime = .TRUE.
           ENDIF
         ENDIF

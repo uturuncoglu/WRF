@@ -7,12 +7,12 @@
 ! NASA Goddard Space Flight Center.
 ! Licensed under the University of Illinois-NCSA license.
 !
-! ESMF Fraction Module
+! MYESMF Fraction Module
 !
 !==============================================================================
 !
-!     ESMF Fraction Module
-      module ESMF_FractionMod
+!     MYESMF Fraction Module
+      module MYESMF_FractionMod
 !
 !==============================================================================
 !
@@ -25,10 +25,10 @@
 !===============================================================================
 !BOPI
 !
-! !MODULE: ESMF_FractionMod
+! !MODULE: MYESMF_FractionMod
 !
 ! !DESCRIPTION:
-! Part of ESMF F90 API wrapper of C++ implemenation
+! Part of MYESMF F90 API wrapper of C++ implemenation
 !
 ! Defines F90 wrapper entry points for corresponding
 ! C++ implementaion of class {\tt ESMC\_Fraction}
@@ -44,9 +44,9 @@
 ! !PRIVATE TYPES:
       private
 !------------------------------------------------------------------------------
-!     ! ESMF_Fraction
+!     ! MYESMF_Fraction
 !
-      type ESMF_Fraction
+      type MYESMF_Fraction
       private
         integer :: n    ! Integer fraction (exact) n/d; numerator
         integer :: d    ! Integer fraction (exact) n/d; denominator
@@ -54,7 +54,7 @@
 !
 !------------------------------------------------------------------------------
 ! !PUBLIC TYPES:
-      public ESMF_Fraction
+      public MYESMF_Fraction
 !------------------------------------------------------------------------------
 !
 ! !PUBLIC MEMBER FUNCTIONS:
@@ -76,4 +76,4 @@
 
 !------------------------------------------------------------------------------
 
-      end module ESMF_FractionMod
+      end module MYESMF_FractionMod

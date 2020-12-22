@@ -9,8 +9,8 @@
 !
 !==============================================================================
 !
-!     ESMF Clock Module
-      module ESMF_ClockMod
+!     MYESMF Clock Module
+      module MYESMF_ClockMod
 !     
 !==============================================================================
 !     
@@ -18,11 +18,11 @@
 !     
 !------------------------------------------------------------------------------
 ! INCLUDES
-#include <ESMF_TimeMgr.inc> 
+#include <MYESMF_TimeMgr.inc> 
 
 !==============================================================================
 !BOPI
-! !MODULE: ESMF_ClockMod
+! !MODULE: MYESMF_ClockMod
 !     
 ! !DESCRIPTION:
 ! Part of Time Manager F90 API wrapper of C++ implemenation
@@ -34,14 +34,14 @@
 !
 !------------------------------------------------------------------------------
 ! !USES:
-      ! inherit from ESMF base class
-      use ESMF_BaseMod
+      ! inherit from MYESMF base class
+      use MYESMF_BaseMod
 
       ! associated derived types
-      use ESMF_TimeIntervalMod   ! , only : ESMF_TimeInterval, &
-                                 !          ESMF_TimeIntervalIsPositive
-      use ESMF_TimeMod           ! , only : ESMF_Time
-      use ESMF_AlarmMod,        only : ESMF_Alarm
+      use MYESMF_TimeIntervalMod   ! , only : MYESMF_TimeInterval, &
+                                 !          MYESMF_TimeIntervalIsPositive
+      use MYESMF_TimeMod           ! , only : MYESMF_Time
+      use MYESMF_AlarmMod,        only : MYESMF_Alarm
 
       implicit none
 !
@@ -49,78 +49,78 @@
 ! !PRIVATE TYPES:
       private
 !------------------------------------------------------------------------------
-!     ! ESMF_Clock
+!     ! MYESMF_Clock
 !     
 !     ! F90 class type to match C++ Clock class in size only;
 !     !  all dereferencing within class is performed by C++ implementation
 
-! internals for ESMF_Clock
-      type ESMF_ClockInt
-        type(ESMF_TimeInterval) :: TimeStep
-        type(ESMF_Time)  :: StartTime
-        type(ESMF_Time)  :: StopTime
-        type(ESMF_Time)  :: RefTime
-        type(ESMF_Time)  :: CurrTime
-        type(ESMF_Time)  :: PrevTime
-        integer(ESMF_KIND_I8) :: AdvanceCount
+! internals for MYESMF_Clock
+      type MYESMF_ClockInt
+        type(MYESMF_TimeInterval) :: TimeStep
+        type(MYESMF_Time)  :: StartTime
+        type(MYESMF_Time)  :: StopTime
+        type(MYESMF_Time)  :: RefTime
+        type(MYESMF_Time)  :: CurrTime
+        type(MYESMF_Time)  :: PrevTime
+        integer(MYESMF_KIND_I8) :: AdvanceCount
         integer :: ClockMutex
         integer :: NumAlarms
-        ! Note:  to mimic ESMF 2.1.0+, AlarmList is maintained 
-        ! within ESMF_Clock even though copies of each alarm are 
-        ! returned from ESMF_AlarmCreate() at the same time they 
+        ! Note:  to mimic MYESMF 2.1.0+, AlarmList is maintained 
+        ! within MYESMF_Clock even though copies of each alarm are 
+        ! returned from MYESMF_AlarmCreate() at the same time they 
         ! are copied into the AlarmList!  This duplication is not 
-        ! as hideous as it might be because the ESMF_Alarm type 
+        ! as hideous as it might be because the MYESMF_Alarm type 
         ! has data members that are all POINTERs (thus the horrible 
         ! shallow-copy-masquerading-as-reference-copy hack works).  
-        type(ESMF_Alarm), pointer, dimension(:) :: AlarmList
+        type(MYESMF_Alarm), pointer, dimension(:) :: AlarmList
       end type
 
-! Actual public type:  this bit allows easy mimic of "deep" ESMF_ClockCreate 
-! in ESMF 2.1.0+
-! NOTE:  DO NOT ADD NON-POINTER STATE TO THIS DATA TYPE.  It emulates ESMF 
+! Actual public type:  this bit allows easy mimic of "deep" MYESMF_ClockCreate 
+! in MYESMF 2.1.0+
+! NOTE:  DO NOT ADD NON-POINTER STATE TO THIS DATA TYPE.  It emulates MYESMF 
 !        shallow-copy-masquerading-as-reference-copy.  
-      type ESMF_Clock
-        type(ESMF_ClockInt), pointer  :: clockint
+      type MYESMF_Clock
+        type(MYESMF_ClockInt), pointer  :: clockint
       end type
 
 !------------------------------------------------------------------------------
 ! !PUBLIC TYPES:
-      public ESMF_Clock
-      public ESMF_ClockInt   ! needed on AIX but not PGI
+      public MYESMF_Clock
+      public MYESMF_ClockInt   ! needed on AIX but not PGI
 !------------------------------------------------------------------------------
 !
 ! !PUBLIC MEMBER FUNCTIONS:
-      public ESMF_ClockCreate
-      public ESMF_ClockDestroy
-      public ESMF_ClockSet
-!      public ESMF_ClockSetOLD
-      public ESMF_ClockGet
-!      public ESMF_ClockGetAdvanceCount
-!      public ESMF_ClockGetTimeStep
-!      public ESMF_ClockSetTimeStep
-!      public ESMF_ClockGetCurrTime
-!      public ESMF_ClockSetCurrTime
-!      public ESMF_ClockGetStartTime
-!      public ESMF_ClockGetStopTime
-!      public ESMF_ClockGetRefTime
-!      public ESMF_ClockGetPrevTime
-!      public ESMF_ClockGetCurrSimTime
-!      public ESMF_ClockGetPrevSimTime
-! This must be public for ESMF_AlarmClockMod...  
-      public ESMF_ClockAddAlarm
-      public ESMF_ClockGetAlarmList
-!      public ESMF_ClockGetNumAlarms
-!      public ESMF_ClockSyncToWallClock
-      public ESMF_ClockAdvance
-      public ESMF_ClockIsStopTime
-      public ESMF_ClockStopTimeDisable
+      public MYESMF_ClockCreate
+      public MYESMF_ClockDestroy
+      public MYESMF_ClockSet
+!      public MYESMF_ClockSetOLD
+      public MYESMF_ClockGet
+!      public MYESMF_ClockGetAdvanceCount
+!      public MYESMF_ClockGetTimeStep
+!      public MYESMF_ClockSetTimeStep
+!      public MYESMF_ClockGetCurrTime
+!      public MYESMF_ClockSetCurrTime
+!      public MYESMF_ClockGetStartTime
+!      public MYESMF_ClockGetStopTime
+!      public MYESMF_ClockGetRefTime
+!      public MYESMF_ClockGetPrevTime
+!      public MYESMF_ClockGetCurrSimTime
+!      public MYESMF_ClockGetPrevSimTime
+! This must be public for MYESMF_AlarmClockMod...  
+      public MYESMF_ClockAddAlarm
+      public MYESMF_ClockGetAlarmList
+!      public MYESMF_ClockGetNumAlarms
+!      public MYESMF_ClockSyncToWallClock
+      public MYESMF_ClockAdvance
+      public MYESMF_ClockIsStopTime
+      public MYESMF_ClockStopTimeDisable
 
-! Required inherited and overridden ESMF_Base class methods
+! Required inherited and overridden MYESMF_Base class methods
 
-!      public ESMF_ClockRead
-!      public ESMF_ClockWrite
-      public ESMF_ClockValidate
-      public ESMF_ClockPrint
+!      public MYESMF_ClockRead
+!      public MYESMF_ClockWrite
+      public MYESMF_ClockValidate
+      public MYESMF_ClockPrint
 !EOPI
 
 !==============================================================================
@@ -133,39 +133,39 @@
 !
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockSetOLD - Initialize a clockint
+! !IROUTINE: MYESMF_ClockSetOLD - Initialize a clockint
 
 ! !INTERFACE:
-      subroutine ESMF_ClockSetOLD(clockint, TimeStep, StartTime, &
+      subroutine MYESMF_ClockSetOLD(clockint, TimeStep, StartTime, &
                                   StopTime, RefTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_ClockInt), intent(out) :: clockint
-      type(ESMF_TimeInterval), intent(in), optional :: TimeStep
-      type(ESMF_Time), intent(in) :: StartTime
-      type(ESMF_Time), intent(in) :: StopTime
-      type(ESMF_Time), intent(in), optional :: RefTime
+      type(MYESMF_ClockInt), intent(out) :: clockint
+      type(MYESMF_TimeInterval), intent(in), optional :: TimeStep
+      type(MYESMF_Time), intent(in) :: StartTime
+      type(MYESMF_Time), intent(in) :: StopTime
+      type(MYESMF_Time), intent(in), optional :: RefTime
       integer, intent(out), optional :: rc
 ! Local
       integer i
     
 ! !DESCRIPTION:
-!     Initialize an {\tt ESMF\_Clock}
+!     Initialize an {\tt MYESMF\_Clock}
 !     
 !     The arguments are:
 !     \begin{description}
 !     \item[clockint]
 !          The object instance to initialize
 !     \item[{[TimeStep]}]
-!          The {\tt ESMF\_Clock}'s time step interval
+!          The {\tt MYESMF\_Clock}'s time step interval
 !     \item[StartTime]
-!          The {\tt ESMF\_Clock}'s starting time
+!          The {\tt MYESMF\_Clock}'s starting time
 !     \item[StopTime]
-!          The {\tt ESMF\_Clock}'s stopping time
+!          The {\tt MYESMF\_Clock}'s stopping time
 !     \item[{[RefTime]}]
-!          The {\tt ESMF\_Clock}'s reference time
+!          The {\tt MYESMF\_Clock}'s reference time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !     
 ! !REQUIREMENTS:
@@ -183,130 +183,130 @@
       clockint%NumAlarms = 0
       clockint%AdvanceCount = 0
       ALLOCATE(clockint%AlarmList(MAX_ALARMS))
-      ! TBH:  This incredible hack can be removed once ESMF_*Validate() 
-      ! TBH:  can tell if a deep ESMF_* was created or not.  
+      ! TBH:  This incredible hack can be removed once MYESMF_*Validate() 
+      ! TBH:  can tell if a deep MYESMF_* was created or not.  
       DO i = 1, MAX_ALARMS
         NULLIFY( clockint%AlarmList( i )%alarmint )
       ENDDO
-      IF ( PRESENT( rc ) ) rc = ESMF_SUCCESS
+      IF ( PRESENT( rc ) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockSetOLD
+      end subroutine MYESMF_ClockSetOLD
 
 
-! !IROUTINE: ESMF_ClockSet - Set clock properties -- for compatibility with ESMF 2.0.1
+! !IROUTINE: MYESMF_ClockSet - Set clock properties -- for compatibility with MYESMF 2.0.1
 
 ! !INTERFACE:
-      subroutine ESMF_ClockSet(clock, TimeStep, StartTime, StopTime, &
+      subroutine MYESMF_ClockSet(clock, TimeStep, StartTime, StopTime, &
                                RefTime, CurrTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock
-      type(ESMF_TimeInterval), intent(in), optional :: TimeStep
-      type(ESMF_Time), intent(in), optional :: StartTime
-      type(ESMF_Time), intent(in), optional :: StopTime
-      type(ESMF_Time), intent(in), optional :: RefTime
-      type(ESMF_Time), intent(in), optional :: CurrTime
+      type(MYESMF_Clock), intent(inout) :: clock
+      type(MYESMF_TimeInterval), intent(in), optional :: TimeStep
+      type(MYESMF_Time), intent(in), optional :: StartTime
+      type(MYESMF_Time), intent(in), optional :: StopTime
+      type(MYESMF_Time), intent(in), optional :: RefTime
+      type(MYESMF_Time), intent(in), optional :: CurrTime
       integer, intent(out), optional :: rc
 ! Local
       integer ierr
     
 ! !DESCRIPTION:
-!     Initialize an {\tt ESMF\_Clock}
+!     Initialize an {\tt MYESMF\_Clock}
 !     
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
 !          The object instance to initialize
 !     \item[{[TimeStep]}]
-!          The {\tt ESMF\_Clock}'s time step interval
+!          The {\tt MYESMF\_Clock}'s time step interval
 !     \item[StartTime]
-!          The {\tt ESMF\_Clock}'s starting time
+!          The {\tt MYESMF\_Clock}'s starting time
 !     \item[StopTime]
-!          The {\tt ESMF\_Clock}'s stopping time
+!          The {\tt MYESMF\_Clock}'s stopping time
 !     \item[{[RefTime]}]
-!          The {\tt ESMF\_Clock}'s reference time
+!          The {\tt MYESMF\_Clock}'s reference time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !     
 ! !REQUIREMENTS:
 !     TMG3.1, TMG3.4.4
 !EOP
-      ierr = ESMF_SUCCESS
+      ierr = MYESMF_SUCCESS
       IF ( PRESENT(TimeStep) ) THEN
-        CALL ESMF_ClockSetTimeStep ( clock, TimeStep, rc=ierr )
+        CALL MYESMF_ClockSetTimeStep ( clock, TimeStep, rc=ierr )
       ENDIF
       IF ( PRESENT(RefTime) ) clock%clockint%RefTime = RefTime
       IF ( PRESENT(StartTime) ) clock%clockint%StartTime = StartTime
       IF ( PRESENT(StopTime) ) clock%clockint%StopTime = StopTime
       IF ( PRESENT(CurrTime) ) THEN
-        CALL ESMF_ClockSetCurrTime(clock, CurrTime, rc=ierr)
+        CALL MYESMF_ClockSetCurrTime(clock, CurrTime, rc=ierr)
       ENDIF
       IF ( PRESENT(rc) ) rc = ierr
 
-      end subroutine ESMF_ClockSet
+      end subroutine MYESMF_ClockSet
 
 
-! Create ESMF_Clock using ESMF 2.1.0+ semantics
-      FUNCTION ESMF_ClockCreate( name, TimeStep, StartTime, StopTime, &
+! Create MYESMF_Clock using MYESMF 2.1.0+ semantics
+      FUNCTION MYESMF_ClockCreate( name, TimeStep, StartTime, StopTime, &
                                  RefTime, rc )
         ! return value
-        type(ESMF_Clock) :: ESMF_ClockCreate
+        type(MYESMF_Clock) :: MYESMF_ClockCreate
         ! !ARGUMENTS:
         character (len=*),       intent(in),  optional :: name
-        type(ESMF_TimeInterval), intent(in), optional :: TimeStep
-        type(ESMF_Time), intent(in) :: StartTime
-        type(ESMF_Time), intent(in) :: StopTime
-        type(ESMF_Time), intent(in), optional :: RefTime
+        type(MYESMF_TimeInterval), intent(in), optional :: TimeStep
+        type(MYESMF_Time), intent(in) :: StartTime
+        type(MYESMF_Time), intent(in) :: StopTime
+        type(MYESMF_Time), intent(in), optional :: RefTime
         integer, intent(out), optional :: rc
         ! locals
-        type(ESMF_Clock) :: clocktmp
+        type(MYESMF_Clock) :: clocktmp
          ! TBH:  ignore allocate errors, for now
         ALLOCATE( clocktmp%clockint )
-        CALL ESMF_ClockSetOLD( clocktmp%clockint,   &
+        CALL MYESMF_ClockSetOLD( clocktmp%clockint,   &
                                TimeStep= TimeStep,  &
                                StartTime=StartTime, &
                                StopTime= StopTime,  &
                                RefTime=RefTime, rc=rc )
-        ESMF_ClockCreate = clocktmp
-      END FUNCTION ESMF_ClockCreate
+        MYESMF_ClockCreate = clocktmp
+      END FUNCTION MYESMF_ClockCreate
 
 
-! Deallocate memory for ESMF_Clock
-      SUBROUTINE ESMF_ClockDestroy( clock, rc )
-         TYPE(ESMF_Clock), INTENT(INOUT) :: clock
+! Deallocate memory for MYESMF_Clock
+      SUBROUTINE MYESMF_ClockDestroy( clock, rc )
+         TYPE(MYESMF_Clock), INTENT(INOUT) :: clock
          INTEGER,          INTENT(  OUT), OPTIONAL :: rc
          ! TBH:  ignore deallocate errors, for now
          DEALLOCATE( clock%clockint%AlarmList )
          DEALLOCATE( clock%clockint )
-         IF ( PRESENT( rc ) ) rc = ESMF_SUCCESS
-      END SUBROUTINE ESMF_ClockDestroy
+         IF ( PRESENT( rc ) ) rc = MYESMF_SUCCESS
+      END SUBROUTINE MYESMF_ClockDestroy
 
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGet - Get clock properties -- for compatibility with ESMF 2.0.1 
+! !IROUTINE: MYESMF_ClockGet - Get clock properties -- for compatibility with MYESMF 2.0.1 
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGet(clock, StartTime, CurrTime,       &
+      subroutine MYESMF_ClockGet(clock, StartTime, CurrTime,       &
                                AdvanceCount, StopTime, TimeStep, &
                                PrevTime, RefTime, &
                                rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out), optional :: StartTime
-      type(ESMF_Time), intent(out), optional :: CurrTime
-      type(ESMF_Time), intent(out), optional :: StopTime
-      type(ESMF_Time), intent(out), optional :: PrevTime
-      type(ESMF_Time), intent(out), optional :: RefTime
-      integer(ESMF_KIND_I8), intent(out), optional :: AdvanceCount
-      type(ESMF_TimeInterval), intent(out), optional :: TimeStep
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out), optional :: StartTime
+      type(MYESMF_Time), intent(out), optional :: CurrTime
+      type(MYESMF_Time), intent(out), optional :: StopTime
+      type(MYESMF_Time), intent(out), optional :: PrevTime
+      type(MYESMF_Time), intent(out), optional :: RefTime
+      integer(MYESMF_KIND_I8), intent(out), optional :: AdvanceCount
+      type(MYESMF_TimeInterval), intent(out), optional :: TimeStep
       integer, intent(out), optional :: rc
       integer :: ierr
 
 ! !DESCRIPTION:
-!     Returns the number of times the {\tt ESMF\_Clock} has been advanced
+!     Returns the number of times the {\tt MYESMF\_Clock} has been advanced
 !     (time stepped)
 !
 !     The arguments are:
@@ -318,65 +318,65 @@
 !     \item[CurrTime]
 !          The current time
 !     \item[AdvanceCount]
-!          The number of times the {\tt ESMF\_Clock} has been advanced
+!          The number of times the {\tt MYESMF\_Clock} has been advanced
 !     \item[StopTime]
-!          The {\tt ESMF\_Clock}'s stopping time
+!          The {\tt MYESMF\_Clock}'s stopping time
 !     \item[{[TimeStep]}]
-!          The {\tt ESMF\_Clock}'s time step interval
+!          The {\tt MYESMF\_Clock}'s time step interval
 !     \item[{[PrevTime]}]
-!          The {\tt ESMF\_Clock}'s previous current time
+!          The {\tt MYESMF\_Clock}'s previous current time
 !     \item[{[PrevTime]}]
-!          The {\tt ESMF\_Clock}'s reference time
+!          The {\tt MYESMF\_Clock}'s reference time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 
 ! !REQUIREMENTS:
 !     TMG3.5.1
 !EOP
-      ierr = ESMF_SUCCESS
+      ierr = MYESMF_SUCCESS
 
       IF ( PRESENT (StartTime) ) THEN
-        CALL ESMF_ClockGetStartTime( clock, StartTime=StartTime, rc=ierr )
+        CALL MYESMF_ClockGetStartTime( clock, StartTime=StartTime, rc=ierr )
       ENDIF
       IF ( PRESENT (CurrTime) ) THEN
-        CALL ESMF_ClockGetCurrTime( clock , CurrTime, ierr )
+        CALL MYESMF_ClockGetCurrTime( clock , CurrTime, ierr )
       ENDIF
       IF ( PRESENT (StopTime) ) THEN
-        CALL ESMF_ClockGetStopTime( clock , StopTime, ierr )
+        CALL MYESMF_ClockGetStopTime( clock , StopTime, ierr )
       ENDIF
       IF ( PRESENT (AdvanceCount) ) THEN
-        CALL ESMF_ClockGetAdvanceCount(clock, AdvanceCount, ierr)
+        CALL MYESMF_ClockGetAdvanceCount(clock, AdvanceCount, ierr)
       ENDIF
       IF ( PRESENT (TimeStep) ) THEN
-        CALL ESMF_ClockGetTimeStep(clock, TimeStep, ierr)
+        CALL MYESMF_ClockGetTimeStep(clock, TimeStep, ierr)
       ENDIF
       IF ( PRESENT (PrevTime) ) THEN
-        CALL ESMF_ClockGetPrevTime(clock, PrevTime, ierr)
+        CALL MYESMF_ClockGetPrevTime(clock, PrevTime, ierr)
       ENDIF
       IF ( PRESENT (RefTime) ) THEN
-        CALL ESMF_ClockGetRefTime(clock, RefTime, ierr)
+        CALL MYESMF_ClockGetRefTime(clock, RefTime, ierr)
       ENDIF
 
       IF ( PRESENT (rc) ) THEN
         rc = ierr
       ENDIF
     
-      end subroutine ESMF_ClockGet
+      end subroutine MYESMF_ClockGet
 
 
-! !IROUTINE: ESMF_ClockGetAdvanceCount - Get the clock's advance count
+! !IROUTINE: MYESMF_ClockGetAdvanceCount - Get the clock's advance count
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetAdvanceCount(clock, AdvanceCount, rc)
+      subroutine MYESMF_ClockGetAdvanceCount(clock, AdvanceCount, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      integer(ESMF_KIND_I8), intent(out) :: AdvanceCount
+      type(MYESMF_Clock), intent(in) :: clock
+      integer(MYESMF_KIND_I8), intent(out) :: AdvanceCount
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Returns the number of times the {\tt ESMF\_Clock} has been advanced
+!     Returns the number of times the {\tt MYESMF\_Clock} has been advanced
 !     (time stepped)
 !
 !     The arguments are:
@@ -384,9 +384,9 @@
 !     \item[clock]
 !          The object instance to get the advance count from
 !     \item[AdvanceCount]
-!          The number of times the {\tt ESMF\_Clock} has been advanced
+!          The number of times the {\tt MYESMF\_Clock} has been advanced
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 
 ! !REQUIREMENTS:
@@ -395,24 +395,24 @@
 
       AdvanceCount = clock%clockint%AdvanceCount
 
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockGetAdvanceCount
+      end subroutine MYESMF_ClockGetAdvanceCount
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetTimeStep - Get a clock's timestep interval
+! !IROUTINE: MYESMF_ClockGetTimeStep - Get a clock's timestep interval
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetTimeStep(clock, TimeStep, rc)
+      subroutine MYESMF_ClockGetTimeStep(clock, TimeStep, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_TimeInterval), intent(out) :: TimeStep
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_TimeInterval), intent(out) :: TimeStep
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s timestep interval
+!     Get an {\tt MYESMF\_Clock}'s timestep interval
 !
 !     The arguments are:
 !     \begin{description}
@@ -421,7 +421,7 @@
 !     \item[TimeStep]
 !          The time step
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -429,24 +429,24 @@
 !EOP
 
       TimeStep = clock%clockint%TimeStep
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockGetTimeStep
+      end subroutine MYESMF_ClockGetTimeStep
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockSetTimeStep - Set a clock's timestep interval
+! !IROUTINE: MYESMF_ClockSetTimeStep - Set a clock's timestep interval
 
 ! !INTERFACE:
-      subroutine ESMF_ClockSetTimeStep(clock, TimeStep, rc)
+      subroutine MYESMF_ClockSetTimeStep(clock, TimeStep, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock  ! really INTENT(OUT)
-      type(ESMF_TimeInterval), intent(in) :: TimeStep
+      type(MYESMF_Clock), intent(inout) :: clock  ! really INTENT(OUT)
+      type(MYESMF_TimeInterval), intent(in) :: TimeStep
       integer, intent(out), optional      :: rc
 
 ! !DESCRIPTION:
-!     Set an {\tt ESMF\_Clock}'s timestep interval
+!     Set an {\tt MYESMF\_Clock}'s timestep interval
 !
 !     The arguments are:
 !     \begin{description}
@@ -455,7 +455,7 @@
 !     \item[TimeStep]
 !          The time step
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -463,24 +463,24 @@
 !EOP
 
       clock%clockint%TimeStep = TimeStep
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_ClockSetTimeStep
+      end subroutine MYESMF_ClockSetTimeStep
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetCurrTime - Get a clock's current time
+! !IROUTINE: MYESMF_ClockGetCurrTime - Get a clock's current time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetCurrTime(clock, CurrTime, rc)
+      subroutine MYESMF_ClockGetCurrTime(clock, CurrTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out) :: CurrTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out) :: CurrTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s current time     
+!     Get an {\tt MYESMF\_Clock}'s current time     
 !
 !     The arguments are:
 !     \begin{description}
@@ -489,7 +489,7 @@
 !     \item[CurrTime]
 !          The current time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -497,23 +497,23 @@
 !EOP
 
       CurrTime = clock%clockint%CurrTime
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
-      end subroutine ESMF_ClockGetCurrTime
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
+      end subroutine MYESMF_ClockGetCurrTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockSetCurrTime - Set a clock's current time
+! !IROUTINE: MYESMF_ClockSetCurrTime - Set a clock's current time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockSetCurrTime(clock, CurrTime, rc)
+      subroutine MYESMF_ClockSetCurrTime(clock, CurrTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock  ! really INTENT(OUT)
-      type(ESMF_Time), intent(in) :: CurrTime
+      type(MYESMF_Clock), intent(inout) :: clock  ! really INTENT(OUT)
+      type(MYESMF_Time), intent(in) :: CurrTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Set an {\tt ESMF\_Clock}'s current time
+!     Set an {\tt MYESMF\_Clock}'s current time
 !
 !     The arguments are:
 !     \begin{description}
@@ -522,7 +522,7 @@
 !     \item[CurrTime]
 !          The current time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -530,24 +530,24 @@
 !EOP
 
       clock%clockint%CurrTime = CurrTime
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockSetCurrTime
+      end subroutine MYESMF_ClockSetCurrTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetStartTime - Get a clock's start time
+! !IROUTINE: MYESMF_ClockGetStartTime - Get a clock's start time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetStartTime(clock, StartTime, rc)
+      subroutine MYESMF_ClockGetStartTime(clock, StartTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out) :: StartTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out) :: StartTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s start time
+!     Get an {\tt MYESMF\_Clock}'s start time
 !
 !     The arguments are:
 !     \begin{description}
@@ -556,7 +556,7 @@
 !     \item[StartTime]
 !          The start time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -564,24 +564,24 @@
 !EOP
 
       StartTime = clock%clockint%StartTime
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockGetStartTime
+      end subroutine MYESMF_ClockGetStartTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetStopTime - Get a clock's stop time
+! !IROUTINE: MYESMF_ClockGetStopTime - Get a clock's stop time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetStopTime(clock, StopTime, rc)
+      subroutine MYESMF_ClockGetStopTime(clock, StopTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out) :: StopTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out) :: StopTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s stop time
+!     Get an {\tt MYESMF\_Clock}'s stop time
 ! 
 !     The arguments are:
 !     \begin{description}
@@ -590,7 +590,7 @@
 !     \item[StopTime]
 !          The stop time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -598,24 +598,24 @@
 !EOP
 
       StopTime = clock%clockint%StopTime
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockGetStopTime
+      end subroutine MYESMF_ClockGetStopTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetRefTime - Get a clock's reference time
+! !IROUTINE: MYESMF_ClockGetRefTime - Get a clock's reference time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetRefTime(clock, RefTime, rc)
+      subroutine MYESMF_ClockGetRefTime(clock, RefTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out) :: RefTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out) :: RefTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s reference time
+!     Get an {\tt MYESMF\_Clock}'s reference time
 !
 !     The arguments are:
 !     \begin{description}
@@ -624,30 +624,30 @@
 !     \item[RefTime]
 !          The reference time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
 !     TMG3.5.3
 !EOP
       refTime = clock%clockint%RefTime
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
-      end subroutine ESMF_ClockGetRefTime
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
+      end subroutine MYESMF_ClockGetRefTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetPrevTime - Get a clock's previous current time
+! !IROUTINE: MYESMF_ClockGetPrevTime - Get a clock's previous current time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetPrevTime(clock, PrevTime, rc)
+      subroutine MYESMF_ClockGetPrevTime(clock, PrevTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Time), intent(out) :: PrevTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Time), intent(out) :: PrevTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s previous current time
+!     Get an {\tt MYESMF\_Clock}'s previous current time
 !
 !     The arguments are:
 !     \begin{description}
@@ -656,7 +656,7 @@
 !     \item[PrevTime]
 !          The previous current time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
@@ -665,26 +665,26 @@
 
 ! hack for bug in PGI 5.1-x
 !      prevTime = Clock%clockint%CurrTime - Clock%clockint%TimeStep
-      prevTime = ESMF_TimeDec( Clock%clockint%CurrTime, &
+      prevTime = MYESMF_TimeDec( Clock%clockint%CurrTime, &
                                Clock%clockint%TimeStep )
 
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
-      end subroutine ESMF_ClockGetPrevTime
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
+      end subroutine MYESMF_ClockGetPrevTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetCurrSimTime - Get a clock's current simulation time
+! !IROUTINE: MYESMF_ClockGetCurrSimTime - Get a clock's current simulation time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetCurrSimTime(clock, CurrSimTime, rc)
+      subroutine MYESMF_ClockGetCurrSimTime(clock, CurrSimTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_TimeInterval), intent(out) :: CurrSimTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_TimeInterval), intent(out) :: CurrSimTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s current simulation time
+!     Get an {\tt MYESMF\_Clock}'s current simulation time
 ! 
 !     The arguments are:
 !     \begin{description}
@@ -693,29 +693,29 @@
 !     \item[CurrSimTime]
 !          The current simulation time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
 !     TMG3.5.5
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockGetCurrSimTime not supported' )
-      end subroutine ESMF_ClockGetCurrSimTime
+      CALL wrf_error_fatal( 'MYESMF_ClockGetCurrSimTime not supported' )
+      end subroutine MYESMF_ClockGetCurrSimTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetPrevSimTime - Get a clock's previous simulation time
+! !IROUTINE: MYESMF_ClockGetPrevSimTime - Get a clock's previous simulation time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetPrevSimTime(clock, PrevSimTime, rc)
+      subroutine MYESMF_ClockGetPrevSimTime(clock, PrevSimTime, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_TimeInterval), intent(out) :: PrevSimTime
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_TimeInterval), intent(out) :: PrevSimTime
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s previous simulation time
+!     Get an {\tt MYESMF\_Clock}'s previous simulation time
 !
 !     The arguments are:
 !     \begin{description}
@@ -724,52 +724,52 @@
 !     \item[PrevSimTime]
 !          The previous simulation time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
 !     TMG3.5.5
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockGetPrevSimTime not supported' )
-      end subroutine ESMF_ClockGetPrevSimTime
+      CALL wrf_error_fatal( 'MYESMF_ClockGetPrevSimTime not supported' )
+      end subroutine MYESMF_ClockGetPrevSimTime
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockAddAlarm - Add an alarm to a clock's alarm list
+! !IROUTINE: MYESMF_ClockAddAlarm - Add an alarm to a clock's alarm list
 
 ! !INTERFACE:
-      subroutine ESMF_ClockAddAlarm(clock, Alarm, rc)
+      subroutine MYESMF_ClockAddAlarm(clock, Alarm, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock
-      type(ESMF_Alarm), intent(inout) :: Alarm
+      type(MYESMF_Clock), intent(inout) :: clock
+      type(MYESMF_Alarm), intent(inout) :: Alarm
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Add an {\tt ESMF\_Alarm} to an {\tt ESMF\_Clock}'s {\tt ESMF\_Alarm} list
+!     Add an {\tt MYESMF\_Alarm} to an {\tt MYESMF\_Clock}'s {\tt MYESMF\_Alarm} list
 !
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
-!          The object instance to add an {\tt ESMF\_Alarm} to
+!          The object instance to add an {\tt MYESMF\_Alarm} to
 !     \item[Alarm]
-!          The {\tt ESMF\_Alarm} to add to the {\tt ESMF\_Clock}'s
-!          {\tt ESMF\_Alarm} list
+!          The {\tt MYESMF\_Alarm} to add to the {\tt MYESMF\_Clock}'s
+!          {\tt MYESMF\_Alarm} list
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !   
 ! !REQUIREMENTS:
 !     TMG4.1, TMG4.2
 !EOP
     
-      IF ( PRESENT( rc ) ) rc = ESMF_SUCCESS
+      IF ( PRESENT( rc ) ) rc = MYESMF_SUCCESS
       clock%clockint%NumAlarms = clock%clockint%NumAlarms + 1
       IF ( clock%clockint%NumAlarms > SIZE (clock%clockint%AlarmList) ) THEN
-        CALL wrf_error_fatal ( 'ESMF_ClockAddAlarm:  too many alarms' )
+        CALL wrf_error_fatal ( 'MYESMF_ClockAddAlarm:  too many alarms' )
       ELSE IF ( .NOT. ASSOCIATED( Alarm%alarmint ) ) THEN
         CALL wrf_error_fatal ( &
-               'ESMF_ClockAddAlarm:  alarm not created' )
+               'MYESMF_ClockAddAlarm:  alarm not created' )
       ELSE
         IF ( Alarm%alarmint%RingTimeSet ) THEN
            Alarm%alarmint%PrevRingTime = Alarm%alarmint%RingTime
@@ -783,35 +783,35 @@
         Alarm%alarmint%Ringing = .FALSE.
 
         ! finally, load the alarm into the list
-! write(0,*)'ESMF_ClockAddAlarm ',clock%clockint%NumAlarms
+! write(0,*)'MYESMF_ClockAddAlarm ',clock%clockint%NumAlarms
         clock%clockint%AlarmList(clock%clockint%NumAlarms) = Alarm
       ENDIF
     
-      end subroutine ESMF_ClockAddAlarm
+      end subroutine MYESMF_ClockAddAlarm
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetAlarmList - Get a clock's alarm list
+! !IROUTINE: MYESMF_ClockGetAlarmList - Get a clock's alarm list
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetAlarmList(clock, AlarmList, rc)
+      subroutine MYESMF_ClockGetAlarmList(clock, AlarmList, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_Alarm), pointer :: AlarmList(:)
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_Alarm), pointer :: AlarmList(:)
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get an {\tt ESMF\_Clock}'s {\tt ESMF\_Alarm} list     
+!     Get an {\tt MYESMF\_Clock}'s {\tt MYESMF\_Alarm} list     
 !   
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
-!          The object instance to get the {\tt ESMF\_Alarm} list from
+!          The object instance to get the {\tt MYESMF\_Alarm} list from
 !     \item[AlarmList]
-!          The {\tt ESMF\_Clock}'s {\tt ESMF\_Alarm} list
+!          The {\tt MYESMF\_Clock}'s {\tt MYESMF\_Alarm} list
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !   
 ! !REQUIREMENTS:
@@ -819,35 +819,35 @@
 !EOP
 
       AlarmList => clock%clockint%AlarmList
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_ClockGetAlarmList
+      end subroutine MYESMF_ClockGetAlarmList
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockGetNumAlarms - Get the number of alarms in a clock's alarm list
+! !IROUTINE: MYESMF_ClockGetNumAlarms - Get the number of alarms in a clock's alarm list
 
 ! !INTERFACE:
-      subroutine ESMF_ClockGetNumAlarms(clock, NumAlarms, rc)
+      subroutine MYESMF_ClockGetNumAlarms(clock, NumAlarms, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
+      type(MYESMF_Clock), intent(in) :: clock
       integer, intent(out) :: NumAlarms
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Get the number of {\tt ESMF\_Alarm}s in an {\tt ESMF\_Clock}'s
-!       {\tt ESMF\_Alarm} list     
+!     Get the number of {\tt MYESMF\_Alarm}s in an {\tt MYESMF\_Clock}'s
+!       {\tt MYESMF\_Alarm} list     
 !   
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
-!          The object instance to get the number of {\tt ESMF\_Alarm}s from
+!          The object instance to get the number of {\tt MYESMF\_Alarm}s from
 !     \item[NumAlarms]
-!          The number of {\tt ESMF\_Alarm}s in the {\tt ESMF\_Clock}'s
-!            {\tt ESMF\_Alarm} list
+!          The number of {\tt MYESMF\_Alarm}s in the {\tt MYESMF\_Clock}'s
+!            {\tt MYESMF\_Alarm} list
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !   
 ! !REQUIREMENTS:
@@ -855,62 +855,62 @@
 !EOP
 
       NumAlarms = clock%clockint%NumAlarms
-      IF ( PRESENT(rc) ) rc = ESMF_SUCCESS
+      IF ( PRESENT(rc) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockGetNumAlarms
+      end subroutine MYESMF_ClockGetNumAlarms
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockSyncToWallClock - Set clock's current time to wall clock time
+! !IROUTINE: MYESMF_ClockSyncToWallClock - Set clock's current time to wall clock time
 
 ! !INTERFACE:
-      subroutine ESMF_ClockSyncToWallClock(clock, rc)
+      subroutine MYESMF_ClockSyncToWallClock(clock, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock
+      type(MYESMF_Clock), intent(inout) :: clock
       integer, intent(out), optional :: rc
     
 ! !DESCRIPTION:
-!     Set an {\tt ESMF\_Clock}'s current time to wall clock time     
+!     Set an {\tt MYESMF\_Clock}'s current time to wall clock time     
 !   
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
 !          The object instance to synchronize to wall clock time
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !   
 ! !REQUIREMENTS:
 !     TMG3.4.5
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockSyncToWallClock not supported' )
-      end subroutine ESMF_ClockSyncToWallClock
+      CALL wrf_error_fatal( 'MYESMF_ClockSyncToWallClock not supported' )
+      end subroutine MYESMF_ClockSyncToWallClock
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockAdvance - Advance a clock's current time by one time step
+! !IROUTINE: MYESMF_ClockAdvance - Advance a clock's current time by one time step
 
 ! !INTERFACE:
-      subroutine ESMF_ClockAdvance(clock, RingingAlarmList, &
+      subroutine MYESMF_ClockAdvance(clock, RingingAlarmList, &
                                    NumRingingAlarms, rc)
 
-use esmf_timemod
+use myesmf_timemod
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(inout) :: clock
-      type(ESMF_Alarm), dimension(MAX_ALARMS), intent(out), optional :: &
+      type(MYESMF_Clock), intent(inout) :: clock
+      type(MYESMF_Alarm), dimension(MAX_ALARMS), intent(out), optional :: &
                                         RingingAlarmList
       integer, intent(out), optional :: NumRingingAlarms
       integer, intent(out), optional :: rc
 ! Local
       logical pred1, pred2, pred3
       integer i, n
-      type(ESMF_Alarm) :: alarm
+      type(MYESMF_Alarm) :: alarm
       logical :: positive_timestep
 !   
 ! !DESCRIPTION:
-!     Advance an {\tt ESMF\_Clock}'s current time by one time step
+!     Advance an {\tt MYESMF\_Clock}'s current time by one time step
 !  
 !     The arguments are:
 !     \begin{description}
@@ -921,7 +921,7 @@ use esmf_timemod
 !     \item[{[NumRingingAlarms]}]
 !          The number of ringing alarms returned
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !  
 ! !REQUIREMENTS:
@@ -930,9 +930,9 @@ use esmf_timemod
 ! hack for bug in PGI 5.1-x
 !      clock%clockint%CurrTime = clock%clockint%CurrTime + &
 !                                clock%clockint%TimeStep
-      clock%clockint%CurrTime = ESMF_TimeInc( clock%clockint%CurrTime, &
+      clock%clockint%CurrTime = MYESMF_TimeInc( clock%clockint%CurrTime, &
                                               clock%clockint%TimeStep )
-      positive_timestep = ESMF_TimeIntervalIsPositive( clock%clockint%TimeStep )
+      positive_timestep = MYESMF_TimeIntervalIsPositive( clock%clockint%TimeStep )
 
       IF ( Present(NumRingingAlarms) ) NumRingingAlarms = 0
       clock%clockint%AdvanceCount = clock%clockint%AdvanceCount + 1
@@ -951,13 +951,13 @@ use esmf_timemod
                 IF ( positive_timestep ) THEN
 ! hack for bug in PGI 5.1-x
 !                  PRED1 = clock%clockint%CurrTime > alarm%alarmint%StopTime
-                  PRED1 = ESMF_TimeGT( clock%clockint%CurrTime, &
+                  PRED1 = MYESMF_TimeGT( clock%clockint%CurrTime, &
                                        alarm%alarmint%StopTime )
                 ELSE
                   ! in this case time step is negative and stop time is 
                   ! less than start time
 !                  PRED1 = clock%clockint%CurrTime < alarm%alarmint%StopTime
-                  PRED1 = ESMF_TimeLT( clock%clockint%CurrTime, &
+                  PRED1 = MYESMF_TimeLT( clock%clockint%CurrTime, &
                                        alarm%alarmint%StopTime )
                 ENDIF
               ENDIF
@@ -972,10 +972,10 @@ use esmf_timemod
 !                   PRED2 = ( alarm%alarmint%RingTime <= clock%clockint%CurrTime     &
 !                          .AND. clock%clockint%CurrTime < alarm%alarmint%RingTime + &
 !                                clock%clockint%TimeStep )
-                   PRED2 = ( ESMF_TimeLE( alarm%alarmint%RingTime,       &
+                   PRED2 = ( MYESMF_TimeLE( alarm%alarmint%RingTime,       &
                                           clock%clockint%CurrTime )      &
-                             .AND. ESMF_TimeLT( clock%clockint%CurrTime, &
-                               ESMF_TimeInc( alarm%alarmint%RingTime,    &
+                             .AND. MYESMF_TimeLT( clock%clockint%CurrTime, &
+                               MYESMF_TimeInc( alarm%alarmint%RingTime,    &
                                              clock%clockint%TimeStep ) ) )
                 ELSE
                   ! in this case time step is negative and stop time is 
@@ -984,10 +984,10 @@ use esmf_timemod
 !                   PRED2 = ( alarm%alarmint%RingTime >= clock%clockint%CurrTime     &
 !                          .AND. clock%clockint%CurrTime > alarm%alarmint%RingTime + &
 !                                clock%clockint%TimeStep )
-                   PRED2 = ( ESMF_TimeGE( alarm%alarmint%RingTime,       &
+                   PRED2 = ( MYESMF_TimeGE( alarm%alarmint%RingTime,       &
                                           clock%clockint%CurrTime )      &
-                             .AND. ESMF_TimeGT( clock%clockint%CurrTime, &
-                               ESMF_TimeInc( alarm%alarmint%RingTime,    &
+                             .AND. MYESMF_TimeGT( clock%clockint%CurrTime, &
+                               MYESMF_TimeInc( alarm%alarmint%RingTime,    &
                                              clock%clockint%TimeStep ) ) )
                 ENDIF
               ENDIF
@@ -998,7 +998,7 @@ use esmf_timemod
 !                   PRED3 = ( alarm%alarmint%PrevRingTime + alarm%alarmint%RingInterval <= &
 !                             clock%clockint%CurrTime )
 
-                   PRED3 = ( ESMF_TimeLE( ESMF_TimeInc(                  &
+                   PRED3 = ( MYESMF_TimeLE( MYESMF_TimeInc(                  &
                                           alarm%alarmint%PrevRingTime,   &
                                           alarm%alarmint%RingInterval ), &
                              clock%clockint%CurrTime ) )
@@ -1010,7 +1010,7 @@ use esmf_timemod
 !                   PRED3 = ( alarm%alarmint%PrevRingTime - alarm%alarmint%RingInterval >= &
 !                             clock%clockint%CurrTime )
 
-                   PRED3 = ( ESMF_TimeGE( ESMF_TimeDec(                  &
+                   PRED3 = ( MYESMF_TimeGE( MYESMF_TimeDec(                  &
                                           alarm%alarmint%PrevRingTime,   &
                                           alarm%alarmint%RingInterval ), &
                              clock%clockint%CurrTime ) )
@@ -1033,7 +1033,7 @@ use esmf_timemod
 !                                                    alarm%alarmint%RingInterval
                    IF ( PRED3 )                                   &
                      alarm%alarmint%PrevRingTime =                &
-                       ESMF_TimeInc( alarm%alarmint%PrevRingTime, &
+                       MYESMF_TimeInc( alarm%alarmint%PrevRingTime, &
                                      alarm%alarmint%RingInterval )
                  ELSE
                    ! in this case time step is negative and stop time is
@@ -1044,7 +1044,7 @@ use esmf_timemod
 !                                                    alarm%alarmint%RingInterval
                    IF ( PRED3 )                                   &
                      alarm%alarmint%PrevRingTime =                &
-                       ESMF_TimeDec( alarm%alarmint%PrevRingTime, &
+                       MYESMF_TimeDec( alarm%alarmint%PrevRingTime, &
                                      alarm%alarmint%RingInterval )
                  ENDIF
                  IF ( PRESENT( RingingAlarmList ) .AND. &
@@ -1061,7 +1061,7 @@ use esmf_timemod
               IF ( positive_timestep ) THEN
 ! hack for bug in PGI 5.1-x
 !                IF ( alarm%alarmint%RingTime <= clock%clockint%CurrTime ) THEN
-                IF ( ESMF_TimeLE( alarm%alarmint%RingTime, &
+                IF ( MYESMF_TimeLE( alarm%alarmint%RingTime, &
                                   clock%clockint%CurrTime ) ) THEN
                    alarm%alarmint%RingTimeSet = .FALSE.  !it is a one time alarm, it rang, now let it resort to interval
                    alarm%alarmint%Ringing = .TRUE.
@@ -1077,7 +1077,7 @@ use esmf_timemod
                 ! less than start time
 ! hack for bug in PGI 5.1-x
 !                IF ( alarm%alarmint%RingTime >= clock%clockint%CurrTime ) THEN
-                IF ( ESMF_TimeGE( alarm%alarmint%RingTime, &
+                IF ( MYESMF_TimeGE( alarm%alarmint%RingTime, &
                                   clock%clockint%CurrTime ) ) THEN
                    alarm%alarmint%RingTimeSet = .FALSE.  !it is a one time alarm, it rang, now let it resort to interval
                    alarm%alarmint%Ringing = .TRUE.
@@ -1097,42 +1097,42 @@ use esmf_timemod
         ENDIF
         clock%clockint%AlarmList(i) = alarm
       ENDDO
-      IF ( PRESENT( rc ) ) rc = ESMF_SUCCESS
+      IF ( PRESENT( rc ) ) rc = MYESMF_SUCCESS
     
-      end subroutine ESMF_ClockAdvance
+      end subroutine MYESMF_ClockAdvance
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockStopTimeDisable - NOOP for compatibility with ESMF 2.1.0+
+! !IROUTINE: MYESMF_ClockStopTimeDisable - NOOP for compatibility with MYESMF 2.1.0+
 
 ! !INTERFACE:
-      subroutine ESMF_ClockStopTimeDisable(clock, rc)
+      subroutine MYESMF_ClockStopTimeDisable(clock, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
+      type(MYESMF_Clock), intent(in) :: clock
       integer, intent(out), optional :: rc
 
-      rc = ESMF_SUCCESS
+      rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_ClockStopTimeDisable
+      end subroutine MYESMF_ClockStopTimeDisable
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockIsStopTime - Has the clock reached its stop time ?
+! !IROUTINE: MYESMF_ClockIsStopTime - Has the clock reached its stop time ?
 
 ! !INTERFACE:
-      function ESMF_ClockIsStopTime(clock, rc)
+      function MYESMF_ClockIsStopTime(clock, rc)
 !
 ! !RETURN VALUE:
-      logical :: ESMF_ClockIsStopTime
+      logical :: MYESMF_ClockIsStopTime
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
+      type(MYESMF_Clock), intent(in) :: clock
       integer, intent(out), optional :: rc
       logical :: positive_timestep
 
 ! !DESCRIPTION:
-!     Return true if {\tt ESMF\_Clock} has reached its stop time, false 
+!     Return true if {\tt MYESMF\_Clock} has reached its stop time, false 
 !     otherwise     
 !
 !     The arguments are:
@@ -1140,211 +1140,211 @@ use esmf_timemod
 !     \item[clock]
 !          The object instance to check
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 
 ! !REQUIREMENTS:
 !     TMG3.5.6
 !EOP
 
-      positive_timestep = ESMF_TimeIntervalIsPositive( clock%clockint%TimeStep )
+      positive_timestep = MYESMF_TimeIntervalIsPositive( clock%clockint%TimeStep )
       IF ( positive_timestep ) THEN
 ! hack for bug in PGI 5.1-x
 !        if ( clock%clockint%CurrTime .GE. clock%clockint%StopTime ) THEN
-        if ( ESMF_TimeGE( clock%clockint%CurrTime, &
+        if ( MYESMF_TimeGE( clock%clockint%CurrTime, &
                           clock%clockint%StopTime ) ) THEN
-          ESMF_ClockIsStopTime = .TRUE.
+          MYESMF_ClockIsStopTime = .TRUE.
         else
-          ESMF_ClockIsStopTime = .FALSE.
+          MYESMF_ClockIsStopTime = .FALSE.
         endif
       ELSE
 ! hack for bug in PGI 5.1-x
 !        if ( clock%clockint%CurrTime .LE. clock%clockint%StopTime ) THEN
-        if ( ESMF_TimeLE( clock%clockint%CurrTime, &
+        if ( MYESMF_TimeLE( clock%clockint%CurrTime, &
                           clock%clockint%StopTime ) ) THEN
-          ESMF_ClockIsStopTime = .TRUE.
+          MYESMF_ClockIsStopTime = .TRUE.
         else
-          ESMF_ClockIsStopTime = .FALSE.
+          MYESMF_ClockIsStopTime = .FALSE.
         endif
       ENDIF
-      IF ( PRESENT( rc ) ) rc = ESMF_SUCCESS
+      IF ( PRESENT( rc ) ) rc = MYESMF_SUCCESS
     
-      end function ESMF_ClockIsStopTime
+      end function MYESMF_ClockIsStopTime
 
 !------------------------------------------------------------------------------
 !
 ! This section defines the overridden Read, Write, Validate and Print methods
-! from the ESMF_Base class
+! from the MYESMF_Base class
 !
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockRead - Restores a clock
+! !IROUTINE: MYESMF_ClockRead - Restores a clock
 
 ! !INTERFACE:
-      subroutine ESMF_ClockRead(clock, TimeStep, StartTime, StopTime, &
+      subroutine MYESMF_ClockRead(clock, TimeStep, StartTime, StopTime, &
                                 RefTime, CurrTime, PrevTime, AdvanceCount, &
                                 AlarmList, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(out) :: clock
-      type(ESMF_TimeInterval), intent(in) :: TimeStep
-      type(ESMF_Time), intent(in) :: StartTime
-      type(ESMF_Time), intent(in) :: StopTime
-      type(ESMF_Time), intent(in) :: RefTime
-      type(ESMF_Time), intent(in) :: CurrTime
-      type(ESMF_Time), intent(in) :: PrevTime
-      integer(ESMF_KIND_I8), intent(in) :: AdvanceCount
-      type(ESMF_Alarm), dimension(MAX_ALARMS), intent(in) :: AlarmList
+      type(MYESMF_Clock), intent(out) :: clock
+      type(MYESMF_TimeInterval), intent(in) :: TimeStep
+      type(MYESMF_Time), intent(in) :: StartTime
+      type(MYESMF_Time), intent(in) :: StopTime
+      type(MYESMF_Time), intent(in) :: RefTime
+      type(MYESMF_Time), intent(in) :: CurrTime
+      type(MYESMF_Time), intent(in) :: PrevTime
+      integer(MYESMF_KIND_I8), intent(in) :: AdvanceCount
+      type(MYESMF_Alarm), dimension(MAX_ALARMS), intent(in) :: AlarmList
       integer, intent(out), optional :: rc
     
 ! !DESCRIPTION:
-!     Restore an {\tt ESMF\_Clock}
+!     Restore an {\tt MYESMF\_Clock}
 !     
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
 !          The object instance to restore
 !     \item[TimeStep]
-!          The {\tt ESMF\_Clock}'s time step interval
+!          The {\tt MYESMF\_Clock}'s time step interval
 !     \item[StartTime]
-!          The {\tt ESMF\_Clock}'s starting time
+!          The {\tt MYESMF\_Clock}'s starting time
 !     \item[StopTime]
-!          The {\tt ESMF\_Clock}'s stopping time
+!          The {\tt MYESMF\_Clock}'s stopping time
 !     \item[RefTime]
-!          The {\tt ESMF\_Clock}'s reference time
+!          The {\tt MYESMF\_Clock}'s reference time
 !     \item[CurrTime]
-!          The {\tt ESMF\_Clock}'s current time
+!          The {\tt MYESMF\_Clock}'s current time
 !     \item[PrevTime]
-!          The {\tt ESMF\_Clock}'s previous time
+!          The {\tt MYESMF\_Clock}'s previous time
 !     \item[AdvanceCount]
-!          The number of times the {\tt ESMF\_Clock} has been advanced
+!          The number of times the {\tt MYESMF\_Clock} has been advanced
 !     \item[AlarmList]
-!          The {\tt ESMF\_Clock}'s {\tt ESMF\_Alarm} list
+!          The {\tt MYESMF\_Clock}'s {\tt MYESMF\_Alarm} list
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !     
 ! !REQUIREMENTS:
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockRead not supported' )
-      end subroutine ESMF_ClockRead
+      CALL wrf_error_fatal( 'MYESMF_ClockRead not supported' )
+      end subroutine MYESMF_ClockRead
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE: ESMF_ClockWrite - Saves a clock
+! !IROUTINE: MYESMF_ClockWrite - Saves a clock
 
 ! !INTERFACE:
-      subroutine ESMF_ClockWrite(clock, TimeStep, StartTime, StopTime, &
+      subroutine MYESMF_ClockWrite(clock, TimeStep, StartTime, StopTime, &
                             RefTime, CurrTime, PrevTime, AdvanceCount, &
                             AlarmList, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
-      type(ESMF_TimeInterval), intent(out) :: TimeStep
-      type(ESMF_Time), intent(out) :: StartTime
-      type(ESMF_Time), intent(out) :: StopTime
-      type(ESMF_Time), intent(out) :: RefTime
-      type(ESMF_Time), intent(out) :: CurrTime
-      type(ESMF_Time), intent(out) :: PrevTime
-      integer(ESMF_KIND_I8), intent(out) :: AdvanceCount
-      type(ESMF_Alarm), dimension(MAX_ALARMS), intent(out) :: AlarmList
+      type(MYESMF_Clock), intent(in) :: clock
+      type(MYESMF_TimeInterval), intent(out) :: TimeStep
+      type(MYESMF_Time), intent(out) :: StartTime
+      type(MYESMF_Time), intent(out) :: StopTime
+      type(MYESMF_Time), intent(out) :: RefTime
+      type(MYESMF_Time), intent(out) :: CurrTime
+      type(MYESMF_Time), intent(out) :: PrevTime
+      integer(MYESMF_KIND_I8), intent(out) :: AdvanceCount
+      type(MYESMF_Alarm), dimension(MAX_ALARMS), intent(out) :: AlarmList
       integer, intent(out), optional :: rc
     
 ! !DESCRIPTION:
-!     Save an {\tt ESMF\_Clock}
+!     Save an {\tt MYESMF\_Clock}
 !     
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
 !          The object instance to save
 !     \item[TimeStep]
-!          The {\tt ESMF\_Clock}'s time step interval
+!          The {\tt MYESMF\_Clock}'s time step interval
 !     \item[StartTime]
-!          The {\tt ESMF\_Clock}'s starting time
+!          The {\tt MYESMF\_Clock}'s starting time
 !     \item[StopTime]
-!          The {\tt ESMF\_Clock}'s stopping time
+!          The {\tt MYESMF\_Clock}'s stopping time
 !     \item[RefTime]
-!          The {\tt ESMF\_Clock}'s reference time
+!          The {\tt MYESMF\_Clock}'s reference time
 !     \item[CurrTime]
-!          The {\tt ESMF\_Clock}'s current time
+!          The {\tt MYESMF\_Clock}'s current time
 !     \item[PrevTime]
-!          The {\tt ESMF\_Clock}'s previous time
+!          The {\tt MYESMF\_Clock}'s previous time
 !     \item[AdvanceCount]
-!          The number of times the {\tt ESMF\_Clock} has been advanced
+!          The number of times the {\tt MYESMF\_Clock} has been advanced
 !     \item[AlarmList]
-!          The {\tt ESMF\_Clock}'s {\tt ESMF\_Alarm} list
+!          The {\tt MYESMF\_Clock}'s {\tt MYESMF\_Alarm} list
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !     
 ! !REQUIREMENTS:
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockWrite not supported' )
-      end subroutine ESMF_ClockWrite
+      CALL wrf_error_fatal( 'MYESMF_ClockWrite not supported' )
+      end subroutine MYESMF_ClockWrite
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_ClockValidate - Validate a Clock's properties
+! !IROUTINE:  MYESMF_ClockValidate - Validate a Clock's properties
 
 ! !INTERFACE:
-      subroutine ESMF_ClockValidate(clock, opts, rc)
+      subroutine MYESMF_ClockValidate(clock, opts, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
+      type(MYESMF_Clock), intent(in) :: clock
       character (len=*), intent(in), optional :: opts
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     Perform a validation check on an {\tt ESMF\_Clock}'s properties
+!     Perform a validation check on an {\tt MYESMF\_Clock}'s properties
 !
 !     The arguments are:  
 !     \begin{description}
 !     \item[clock]
-!          {\tt ESMF\_Clock} to validate
+!          {\tt MYESMF\_Clock} to validate
 !     \item[{[opts]}]
 !          Validate options
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description} 
 !
 ! !REQUIREMENTS:
 !     TMGn.n.n
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockValidate not supported' )
-      end subroutine ESMF_ClockValidate
+      CALL wrf_error_fatal( 'MYESMF_ClockValidate not supported' )
+      end subroutine MYESMF_ClockValidate
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_ClockPrint - Print out a Clock's properties
+! !IROUTINE:  MYESMF_ClockPrint - Print out a Clock's properties
 
 ! !INTERFACE:
-      subroutine ESMF_ClockPrint(clock, opts, rc)
+      subroutine MYESMF_ClockPrint(clock, opts, rc)
 
 ! !ARGUMENTS:
-      type(ESMF_Clock), intent(in) :: clock
+      type(MYESMF_Clock), intent(in) :: clock
       character (len=*), intent(in), optional :: opts
       integer, intent(out), optional :: rc
 
 ! !DESCRIPTION:
-!     To support testing/debugging, print out an {\tt ESMF\_Clock}'s
+!     To support testing/debugging, print out an {\tt MYESMF\_Clock}'s
 !     properties.
 ! 
 !     The arguments are:
 !     \begin{description}
 !     \item[clock]
-!          {\tt ESMF\_Clock} to print out
+!          {\tt MYESMF\_Clock} to print out
 !     \item[{[opts]}]
 !          Print options
 !     \item[{[rc]}]
-!          Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!          Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !     \end{description}
 !
 ! !REQUIREMENTS:
 !     TMGn.n.n
 !EOP
-      CALL wrf_error_fatal( 'ESMF_ClockPrint not supported' )
-      end subroutine ESMF_ClockPrint
+      CALL wrf_error_fatal( 'MYESMF_ClockPrint not supported' )
+      end subroutine MYESMF_ClockPrint
 
 !------------------------------------------------------------------------------
 
-      end module ESMF_ClockMod
+      end module MYESMF_ClockMod

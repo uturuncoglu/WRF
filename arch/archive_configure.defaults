@@ -36,7 +36,7 @@ POUND_DEF	=	-DNONSTANDARD_SYSTEM -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAIN
 CPPFLAGS	=	-I$(LIBINCLUDE) -C -P $(ARCHFLAGS) $(COREDEFS) $(ENVCOMPDEFS) $(POUND_DEF)
 PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
-LIB             =	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+LIB             =	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
@@ -149,7 +149,7 @@ POUND_DEF	=	-DNONSTANDARD_SYSTEM -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAIN
 CPPFLAGS	=	-I$(LIBINCLUDE) -C -P $(ARCHFLAGS) $(COREDEFS) $(ENVCOMPDEFS) $(POUND_DEF)
 PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
-LIB             =	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+LIB             =	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
@@ -264,7 +264,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -64 -OPT:Olimit=5269       CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -382,7 +382,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 AR              =       ar ru
 M4              =       m4 -B14000
 LDFLAGS         =       CONFIGURE_LDFLAGS
@@ -500,7 +500,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH $(OMP) \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -64 -OPT:Olimit=5269       CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -620,7 +620,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCOPTIM)       CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 #CPP            =       /opt/SUNWspro/bin/fpp
@@ -762,7 +762,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCOPTIM) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 #CPP            =       /opt/SUNWspro/bin/fpp
@@ -885,7 +885,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -lmass -lmassv \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 
 LDFLAGS         =	 CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
@@ -1031,7 +1031,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -lmass -lmassv \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 
 LDFLAGS         =	 CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
@@ -1182,7 +1182,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -lmass -lmassv -lxlsmp \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -1336,7 +1336,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -lmass -lmassv -lxlsmp \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -1651,7 +1651,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH CONFIGURE_PHDF5_LIB_PATH -L$(W
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	 CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP		=	/lib/cpp
@@ -1807,7 +1807,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
 -lomnithread -lomniDynamic4  -lnetcdf_c++ -lnetcdf  -lxlf90 -lxlopt  \
                         -lxlf -lxlomp_ser -lm -lc -lpthread \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int  \
-                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	 CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP		=	/lib/cpp
@@ -1950,7 +1950,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH CONFIGURE_PNETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/RSL_LITE -lrsl_lite -L/bgl/local/lib -lmass -lmassv \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
 			-L/home/michalak/fftpack5 -lfftpack \
 			$(TRACE_LIB) $(MPI_LIB)
 
@@ -2106,7 +2106,7 @@ PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
 LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time  \
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share
@@ -2247,7 +2247,7 @@ PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
 LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share
@@ -2394,7 +2394,7 @@ REGISTRY        =       Registry
 LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/RSL_LITE -lrsl_lite  \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share
@@ -2553,7 +2553,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -automatic -convert big_endian $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp -C -P
@@ -2691,7 +2691,7 @@ REGISTRY        =       Registry
 LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/RSL_LITE -lrsl_lite  \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share
@@ -2843,7 +2843,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o  -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o  -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -automatic -convert big_endian CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -2956,7 +2956,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o  -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o  -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -automatic -convert big_endian CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P
@@ -3055,7 +3055,7 @@ ARCHFLAGS       = $(COREDEFS) CONFIGURE_NETCDF_FLAG -DGRIB1 CONFIGURE_GRIB2_FLAG
 			-DLIMIT_ARGS
 PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
-LIB             = 	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+LIB             = 	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
@@ -3119,7 +3119,7 @@ CPPFLAGS	=	-I$(LIBINCLUDE) -C -P $(ARCHFLAGS) $(COREDEFS) $(ENVCOMPDEFS) $(POUND
 PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
 #LIB             =       CONFIGURE_NETCDF_LIB_PATH 
-LIB             = 	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time  \
+LIB             = 	$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
@@ -3187,7 +3187,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) -byteswapio CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -3313,7 +3313,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -3447,7 +3447,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       -byteswapio $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -3580,7 +3580,7 @@ LIB               = CONFIGURE_NETCDF_LIB_PATH $(OMP) \
                     CONFIGURE_GRIB2_LIB \
                     -L../external/io_grib_share -lio_grib_share \
                     -L../external/io_int -lwrfio_int \
-                    ../frame/module_internal_header_util.o ../frame/pack_utils.o -L../external/esmf_time_f90 -lesmf_time 
+                    ../frame/module_internal_header_util.o ../frame/pack_utils.o -L../external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           =  $(OMP)
 ENVCOMPDEFS       =  CONFIGURE_COMPILEFLAGS
 CPP               =  /lib/cpp -C -P -traditional
@@ -3727,7 +3727,7 @@ LIB               = CONFIGURE_NETCDF_LIB_PATH -L../external/RSL_LITE -lrsl_lite 
                     CONFIGURE_GRIB2_LIB \
                     -L../external/io_grib_share -lio_grib_share \
                     -L../external/io_int -lwrfio_int \
-                    ../frame/module_internal_header_util.o ../frame/pack_utils.o -L../external/esmf_time_f90 -lesmf_time 
+                    ../frame/module_internal_header_util.o ../frame/pack_utils.o -L../external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           =  $(OMP)
 ENVCOMPDEFS       =  CONFIGURE_COMPILEFLAGS
 CPP               =  /lib/cpp -C -P -traditional
@@ -3936,7 +3936,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -4059,7 +4059,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       -byteswapio CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -4191,7 +4191,7 @@ LIB = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) -LCONFIGURE_NET
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-      $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+      $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
       -lmpifarg -lmpi -lelan -lintrins -lPEPCF90 -limf -lguide -lunwind -lpthread -L/opt/mlib/lib/linux -lveclib8
 LDFLAGS = $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
@@ -4325,7 +4325,7 @@ LIB = -Vaxlib -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) -L/u/nc
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L/usr/local/vmi/mpich/lib/ecc6 -lmpich -lfmpich -lvmi -ldl -lpthread -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L/usr/local/vmi/mpich/lib/ecc6 -lmpich -lfmpich -lvmi -ldl -lpthread -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS = $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP = /lib/cpp -C -P -traditional
@@ -4450,7 +4450,7 @@ PERL            =       CONFIGURE_PERL_PATH
 REGISTRY        =       Registry
 LIB             =	CONFIGURE_NETCDF_LIB_PATH $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                        -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+                        -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
 			-L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share
@@ -4586,7 +4586,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -traditional
@@ -4723,7 +4723,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
 			-L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) -convert big_endian CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -traditional
@@ -4881,7 +4881,7 @@ LIB             =       -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf -L/u
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			-L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time \
+			-L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time\
 			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o
 
 #-lmpi for 4byte storage, -lmpiw for 8 byte storage 
@@ -5049,7 +5049,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -5219,7 +5219,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -5393,7 +5393,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -5555,7 +5555,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -5721,7 +5721,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -5902,7 +5902,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                    -L/usr/lib -lmpi -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -6076,7 +6076,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -6249,7 +6249,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -6404,7 +6404,7 @@ LIB             =       -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf CONF
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-			-L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time -lmalloc
+			-L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time-lmalloc
 
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 LDFLAGS         =       
@@ -6535,7 +6535,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =        /lib/cpp
@@ -6650,7 +6650,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =        /lib/cpp
@@ -6766,7 +6766,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCOPTIM) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =        /lib/cpp
@@ -6889,7 +6889,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 
 LDFLAGS         =	 -Wl,-stack_size,10000000,-stack_addr,0xc0000000 CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
@@ -7020,7 +7020,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -lxlsmp \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(OMP) -Wl,-stack_size,10000000,-stack_addr,0xc0000000  CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =        /usr/bin/cpp -C -P -xassembler-with-cpp
@@ -7126,7 +7126,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp  -C -P -xassembler-with-cpp
@@ -7247,7 +7247,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS -i-static -static-libcxa
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp  -C -P -xassembler-with-cpp
@@ -7369,7 +7369,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS -i-static -static-libcxa
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp  -C -P -xassembler-with-cpp
@@ -7493,7 +7493,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =	$(FCFLAGS) $(OMP) CONFIGURE_LDFLAGS -i-static -static-libcxa
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp  -C -P -xassembler-with-cpp
@@ -7620,7 +7620,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       -byteswapio $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp  -C -P -xassembler-with-cpp
@@ -7759,7 +7759,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 
 LDFLAGS         =	 -Wl,-stack_size,10000000,-stack_addr,0xc0000000 CONFIGURE_LDFLAGS -L/usr/lib -lSystemStubs
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
@@ -7882,7 +7882,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) 
 ENVCOMPDEFS	=	
 WRF_CHEM	=	0 
@@ -8012,7 +8012,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /usr/bin/cpp -C -P -traditional
@@ -8138,7 +8138,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) -byteswapio CONFIGURE_LDFLAGS
 ENVCOMPDEFS     =       CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -8259,7 +8259,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                        $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       -byteswapio
 CPP             =       /lib/cpp -C -P -traditional
 POUND_DEF       =       -DNO_RRTM_PHYSICS  -traditional $(COREDEFS) -DNONSTANDARD_SYSTEM -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -8395,7 +8395,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
 			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
-                        -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+                        -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 # add this to LIB to use XT3 iobuf library after loading iobuf module, also requires
 # properly built netCDF library that includes iobuf
 #                       $(IOBUF_POST_LINK_OPTS)
@@ -8526,7 +8526,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time -L$(SX_BASE_CPLUS)/lib -lcpp
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time-L$(SX_BASE_CPLUS)/lib -lcpp
 LDFLAGS         =       $(FCFLAGS) -Wl,-h nodefs CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -8664,7 +8664,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       cpp -C -P -traditional
@@ -8786,7 +8786,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib1 -lio_grib1 \
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -8914,7 +8914,7 @@ LIB             =       CONFIGURE_NETCDF_LIB_PATH -L$(WRF_SRC_ROOT_DIR)/external
                         CONFIGURE_GRIB2_LIB \
                         -L$(WRF_SRC_ROOT_DIR)/external/io_grib_share -lio_grib_share \
 			-L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
-			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time 
+			$(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS         =       $(FCFLAGS) CONFIGURE_LDFLAGS
 ENVCOMPDEFS	=	CONFIGURE_COMPILEFLAGS
 CPP             =       /lib/cpp -C -P -traditional
@@ -9235,7 +9235,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -9408,7 +9408,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -9580,7 +9580,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -9763,7 +9763,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -9932,7 +9932,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -10114,7 +10114,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -10297,7 +10297,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -10471,7 +10471,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -10645,7 +10645,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -10827,7 +10827,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -11009,7 +11009,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)
@@ -11183,7 +11183,7 @@ LIB               = -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf $(OMP) \
                     -L$(WRF_SRC_ROOT_DIR)/external/io_int -lwrfio_int \
                     $(WRF_SRC_ROOT_DIR)/frame/module_internal_header_util.o $(WRF_SRC_ROOT_DIR)/frame/pack_utils.o \
                         -L$(WRF_SRC_ROOT_DIR)/external/fftpack/fftpack5 -lfftpack \
-                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lesmf_time
+                     -L$(WRF_SRC_ROOT_DIR)/external/esmf_time_f90 -lmyesmf_time
 LDFLAGS           = -O3 -ip $(OMP) CONFIGURE_LDFLAGS
 CPP               = /lib/cpp -C -P -traditional
 POUND_DEF         = -DNO_RRTM_PHYSICS  -DCONFIG_BUF_LEN=$(CONFIG_BUF_LEN) -DMAX_DOMAINS_F=$(MAX_DOMAINS)

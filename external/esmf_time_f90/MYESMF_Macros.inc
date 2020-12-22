@@ -15,12 +15,12 @@ These lines prevent this file from being read more than once if it
 ends up being included multiple times.
 #endif
 
-#ifndef ESMF_MACROS_INC
-#define ESMF_MACROS_INC
+#ifndef MYESMF_MACROS_INC
+#define MYESMF_MACROS_INC
 
 #if 0
 
-former file contents moved to ESMF_BaseMod
+former file contents moved to MYESMF_BaseMod
 so user code can be compiled without requiring
 the preprocessor.
 
@@ -30,6 +30,6 @@ the preprocessor.
 i left the following macro here in case it is needed for our internal use.
 #endif
 
-#define ESMF_SRCLINE __FILE__, __LINE__
+#define MYESMF_SRCLINE __FILE__, __LINE__
 
 #endif 

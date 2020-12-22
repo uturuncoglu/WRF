@@ -418,10 +418,10 @@ if ( i .eq. history_alarm .or. i .eq. restart_alarm .or. i .eq. auxhist24_alarm)
 if ( i .eq. history_alarm ) write(*,*)'----------------- info for history alarm ',i
 if ( i .eq. restart_alarm ) write(*,*)'----------------- info for restart alarm ',i
 if ( i .eq. auxhist24_alarm ) write(*,*)'----------------- info for auxhist24 alarm ',i
-CALL ESMF_TimeGet(curTime, TimeString=debuggal ) ; write(*,*)'curTime ',TRIM(debuggal)
-CALL ESMF_TimeGet(ringTime, TimeString=debuggal ) ; write(*,*)'ringTime ',TRIM(debuggal)
-CALL ESMF_TimeIntervalGet(tmpinterval, TimeString=debuggal ) ; write(*,*)'tmpinterval ',TRIM(debuggal)
-CALL ESMF_TimeIntervalGet(interval, TimeString=debuggal ) ; write(*,*)'interval ',TRIM(debuggal)
+CALL MYESMF_TimeGet(curTime, TimeString=debuggal ) ; write(*,*)'curTime ',TRIM(debuggal)
+CALL MYESMF_TimeGet(ringTime, TimeString=debuggal ) ; write(*,*)'ringTime ',TRIM(debuggal)
+CALL MYESMF_TimeIntervalGet(tmpinterval, TimeString=debuggal ) ; write(*,*)'tmpinterval ',TRIM(debuggal)
+CALL MYESMF_TimeIntervalGet(interval, TimeString=debuggal ) ; write(*,*)'interval ',TRIM(debuggal)
 write(*,*)'interval seconds ',seconds,' tmpinterval seconds ',seconds2,' seconds-seconds2 ',seconds-seconds2
 write(*,*)'----------------- '
 endif

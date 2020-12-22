@@ -9,8 +9,8 @@
 !
 !==============================================================================
 !
-!     ESMF Alarm-Clock Module
-      module ESMF_AlarmClockMod
+!     MYESMF Alarm-Clock Module
+      module MYESMF_AlarmClockMod
 !
 !==============================================================================
 !
@@ -18,15 +18,15 @@
 !
 !------------------------------------------------------------------------------
 ! INCLUDES
-#include <ESMF_TimeMgr.inc>
+#include <MYESMF_TimeMgr.inc>
 
 !===============================================================================
 !BOPI
 !
-! !MODULE: ESMF_AlarmClockMod
+! !MODULE: MYESMF_AlarmClockMod
 !
 ! !DESCRIPTION:
-! Separate module that uses both ESMF_AlarmMod and ESMF_ClockMod.  
+! Separate module that uses both MYESMF_AlarmMod and MYESMF_ClockMod.  
 ! Separation is needed to avoid cyclic dependence.  
 !
 ! Defines F90 wrapper entry points for corresponding
@@ -36,13 +36,13 @@
 !
 !------------------------------------------------------------------------------
 ! !USES:
-      ! inherit ESMF_Alarm and ESMF_Clock
-      use ESMF_AlarmMod, only : ESMF_Alarm, ESMF_AlarmSet
-      use ESMF_ClockMod, only : ESMF_Clock, ESMF_ClockAddAlarm
+      ! inherit MYESMF_Alarm and MYESMF_Clock
+      use MYESMF_AlarmMod, only : MYESMF_Alarm, MYESMF_AlarmSet
+      use MYESMF_ClockMod, only : MYESMF_Clock, MYESMF_ClockAddAlarm
 
       ! associated derived types
-      use ESMF_TimeIntervalMod, only : ESMF_TimeInterval
-      use ESMF_TimeMod,         only : ESMF_Time
+      use MYESMF_TimeIntervalMod, only : MYESMF_TimeInterval
+      use MYESMF_TimeMod,         only : MYESMF_Time
 
       implicit none
 
@@ -52,7 +52,7 @@
 !------------------------------------------------------------------------------
 
 ! !PUBLIC MEMBER FUNCTIONS:
-      public ESMF_AlarmCreate
+      public MYESMF_AlarmCreate
 
 !==============================================================================
 
@@ -61,36 +61,36 @@
 !==============================================================================
 
 
-! Create ESMF_Alarm using ESMF 2.1.0+ semantics
-      FUNCTION ESMF_AlarmCreate( clock, RingTime, RingInterval, &
+! Create MYESMF_Alarm using MYESMF 2.1.0+ semantics
+      FUNCTION MYESMF_AlarmCreate( clock, RingTime, RingInterval, &
                                  StopTime, Enabled, rc )
 
         ! return value
-        type(ESMF_Alarm) :: ESMF_AlarmCreate
+        type(MYESMF_Alarm) :: MYESMF_AlarmCreate
         ! !ARGUMENTS:
-        type(ESMF_Clock), intent(inout), optional :: clock
-        type(ESMF_Time), intent(in), optional :: RingTime
-        type(ESMF_TimeInterval), intent(in), optional :: RingInterval
-        type(ESMF_Time), intent(in), optional :: StopTime
+        type(MYESMF_Clock), intent(inout), optional :: clock
+        type(MYESMF_Time), intent(in), optional :: RingTime
+        type(MYESMF_TimeInterval), intent(in), optional :: RingInterval
+        type(MYESMF_Time), intent(in), optional :: StopTime
         logical, intent(in), optional :: Enabled
         integer, intent(out), optional :: rc
         ! locals
-        type(ESMF_Alarm) :: alarmtmp
+        type(MYESMF_Alarm) :: alarmtmp
          ! TBH:  ignore allocate errors, for now
         ALLOCATE( alarmtmp%alarmint )
-        CALL ESMF_AlarmSet( alarmtmp,                  &
+        CALL MYESMF_AlarmSet( alarmtmp,                  &
                             RingTime=RingTime,         &
                             RingInterval=RingInterval, &
                             StopTime=StopTime,         &
                             Enabled=Enabled,           &
                             rc=rc )
         IF ( PRESENT ( clock ) ) THEN
-          CALL ESMF_ClockAddAlarm( clock, alarmtmp, rc )
+          CALL MYESMF_ClockAddAlarm( clock, alarmtmp, rc )
         ENDIF
-        ESMF_AlarmCreate = alarmtmp
-      END FUNCTION ESMF_AlarmCreate
+        MYESMF_AlarmCreate = alarmtmp
+      END FUNCTION MYESMF_AlarmCreate
 
 
 !------------------------------------------------------------------------------
 
-      end module ESMF_AlarmClockMod
+      end module MYESMF_AlarmClockMod

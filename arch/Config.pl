@@ -237,8 +237,8 @@ while ( <CONFIGURE_DEFAULTS> )
     else
       {
         if ( $sw_os == Interix ) {
-           $_ =~ s:ESMFIOLIB:\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libesmf_time.a:g ;
-           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libesmf_time.a:g ;
+           $_ =~ s:ESMFIOLIB:\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libmyesmf_time.a:g ;
+           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libmyesmf_time.a:g ;
         } else {
            $_ =~ s:ESMFIOLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lesmf_time:g ;
            $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lesmf_time:g ;

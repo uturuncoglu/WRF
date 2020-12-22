@@ -7,7 +7,7 @@
 ! NASA Goddard Space Flight Center.
 ! Licensed under the University of Illinois-NCSA license.
 !
-! ESMF Base Module
+! MYESMF Base Module
 !
 ! (all lines between the !BOP and !EOP markers will be included in the
 ! automated document processing.)
@@ -16,10 +16,10 @@
 !------------------------------------------------------------------------------
 ! module definition
 
-      module ESMF_BaseMod
+      module MYESMF_BaseMod
  
 !BOP
-! !MODULE: ESMF_BaseMod - Base class for all ESMF classes
+! !MODULE: MYESMF_BaseMod - Base class for all MYESMF classes
 !
 ! !DESCRIPTION:
 !
@@ -27,7 +27,7 @@
 !  and functions which operate on all types.  This is an
 !  interface to the actual C++ base class implementation in the ../src dir.
 !
-! See the ESMF Developers Guide document for more details.
+! See the MYESMF Developers Guide document for more details.
 !
 !------------------------------------------------------------------------------
 
@@ -41,41 +41,41 @@
 !
 !    Global integer parameters, used frequently
 
-      integer, parameter :: ESMF_SUCCESS = 0, ESMF_FAILURE = -1
-      integer, parameter :: ESMF_MAXSTR = 128
-      integer, parameter :: ESMF_MAXDIM = 7, &
-                            ESMF_MAXDECOMPDIM=3, &
-                            ESMF_MAXGRIDDIM=2
+      integer, parameter :: MYESMF_SUCCESS = 0, MYESMF_FAILURE = -1
+      integer, parameter :: MYESMF_MAXSTR = 128
+      integer, parameter :: MYESMF_MAXDIM = 7, &
+                            MYESMF_MAXDECOMPDIM=3, &
+                            MYESMF_MAXGRIDDIM=2
      
-      integer, parameter :: ESMF_MAJOR_VERSION = 2
-      integer, parameter :: ESMF_MINOR_VERSION = 1
-      integer, parameter :: ESMF_REVISION      = 1
-      integer, parameter :: ESMF_PATCHLEVEL    = 0
-      character(32), parameter :: ESMF_VERSION_STRING = "2.1.1"
+      integer, parameter :: MYESMF_MAJOR_VERSION = 2
+      integer, parameter :: MYESMF_MINOR_VERSION = 1
+      integer, parameter :: MYESMF_REVISION      = 1
+      integer, parameter :: MYESMF_PATCHLEVEL    = 0
+      character(32), parameter :: MYESMF_VERSION_STRING = "2.1.1"
 
 !------------------------------------------------------------------------------
 !
-      type ESMF_Status
+      type MYESMF_Status
       private
           integer :: status
       end type
 
-      type(ESMF_Status), parameter :: ESMF_STATE_UNINIT = ESMF_Status(1), &
-                                      ESMF_STATE_READY = ESMF_Status(2), &
-                                      ESMF_STATE_UNALLOCATED = ESMF_Status(3), &
-                                      ESMF_STATE_ALLOCATED = ESMF_Status(4), &
-                                      ESMF_STATE_BUSY = ESMF_Status(5), &
-                                      ESMF_STATE_INVALID = ESMF_Status(6)
+      type(MYESMF_Status), parameter :: MYESMF_STATE_UNINIT = MYESMF_Status(1), &
+                                      MYESMF_STATE_READY = MYESMF_Status(2), &
+                                      MYESMF_STATE_UNALLOCATED = MYESMF_Status(3), &
+                                      MYESMF_STATE_ALLOCATED = MYESMF_Status(4), &
+                                      MYESMF_STATE_BUSY = MYESMF_Status(5), &
+                                      MYESMF_STATE_INVALID = MYESMF_Status(6)
  
 !------------------------------------------------------------------------------
 !
-      type ESMF_Pointer
+      type MYESMF_Pointer
       private
           integer*8 :: ptr
       end type
 
-      type(ESMF_Pointer), parameter :: ESMF_NULL_POINTER = ESMF_Pointer(0), &
-                                       ESMF_BAD_POINTER = ESMF_Pointer(-1)
+      type(MYESMF_Pointer), parameter :: MYESMF_NULL_POINTER = MYESMF_Pointer(0), &
+                                       MYESMF_BAD_POINTER = MYESMF_Pointer(-1)
 
 
 !------------------------------------------------------------------------------
@@ -84,33 +84,33 @@
       !!   a datatype into integer, then we could use the type and kind as
       !!   targets in a select case() statement and make the contents private.
       !!   (see pg 248 of the "big book")
-      type ESMF_DataType
+      type MYESMF_DataType
       !!private
           integer :: dtype
       end type
 
-      type(ESMF_DataType), parameter :: ESMF_DATA_INTEGER = ESMF_DataType(1), &
-                                        ESMF_DATA_REAL = ESMF_DataType(2), &
-                                        ESMF_DATA_LOGICAL = ESMF_DataType(3), &
-                                        ESMF_DATA_CHARACTER = ESMF_DataType(4)
+      type(MYESMF_DataType), parameter :: MYESMF_DATA_INTEGER = MYESMF_DataType(1), &
+                                        MYESMF_DATA_REAL = MYESMF_DataType(2), &
+                                        MYESMF_DATA_LOGICAL = MYESMF_DataType(3), &
+                                        MYESMF_DATA_CHARACTER = MYESMF_DataType(4)
 
 !------------------------------------------------------------------------------
 
       integer, parameter :: &
-                   ESMF_KIND_I1 = selected_int_kind(2), &
-                   ESMF_KIND_I2 = selected_int_kind(4), &
-                   ESMF_KIND_I4 = selected_int_kind(9), &
-                   ESMF_KIND_I8 = selected_int_kind(14), &
-                   ESMF_KIND_R4 = selected_real_kind(3,25), &
-                   ESMF_KIND_R8 = selected_real_kind(6,45), &
-                   ESMF_KIND_C8 = selected_real_kind(3,25), &
-                   ESMF_KIND_C16 = selected_real_kind(6,45)
+                   MYESMF_KIND_I1 = selected_int_kind(2), &
+                   MYESMF_KIND_I2 = selected_int_kind(4), &
+                   MYESMF_KIND_I4 = selected_int_kind(9), &
+                   MYESMF_KIND_I8 = selected_int_kind(14), &
+                   MYESMF_KIND_R4 = selected_real_kind(3,25), &
+                   MYESMF_KIND_R8 = selected_real_kind(6,45), &
+                   MYESMF_KIND_C8 = selected_real_kind(3,25), &
+                   MYESMF_KIND_C16 = selected_real_kind(6,45)
 
 !------------------------------------------------------------------------------
 
-      type ESMF_DataValue
+      type MYESMF_DataValue
       private
-          type(ESMF_DataType) :: dt
+          type(MYESMF_DataType) :: dt
           integer :: rank
           ! how do you do values of all types here ? TODO
           ! in C++ i'd do a union w/ overloaded access funcs
@@ -120,24 +120,24 @@
           !real, dimension (:), pointer :: vrp
           !logical :: vl
           !logical, pointer :: vlp
-          !character (len=ESMF_MAXSTR) :: vc
+          !character (len=MYESMF_MAXSTR) :: vc
           !character, pointer :: vcp
       end type
 
 !------------------------------------------------------------------------------
 !
-      type ESMF_Attribute
+      type MYESMF_Attribute
       private
-          character (len=ESMF_MAXSTR) :: attr_name
-          type (ESMF_DataType) :: attr_type
-          type (ESMF_DataValue) :: attr_value
+          character (len=MYESMF_MAXSTR) :: attr_name
+          type (MYESMF_DataType) :: attr_type
+          type (MYESMF_DataValue) :: attr_value
       end type
 
 !------------------------------------------------------------------------------
 !
       !! TODO: this should be a shallow object, with a simple init() and
       !!  get() function, and the contents should go back to being private.
-      type ESMF_AxisIndex
+      type MYESMF_AxisIndex
 !     !!private
           integer :: l
           integer :: r
@@ -147,7 +147,7 @@
       end type
 
       !! TODO: same comment as above.
-      type ESMF_MemIndex
+      type MYESMF_MemIndex
 !     !!private
           integer :: l
           integer :: r
@@ -157,7 +157,7 @@
 
 !------------------------------------------------------------------------------
 !
-      type ESMF_BasePointer
+      type MYESMF_BasePointer
       private
           integer*8 :: base_ptr
       end type
@@ -167,58 +167,58 @@
 !------------------------------------------------------------------------------
 !
 !     ! WARNING: must match corresponding values in ../include/ESMC_Base.h
-      type ESMF_Logical
+      type MYESMF_Logical
       private
           integer :: value
       end type
 
-      type(ESMF_Logical), parameter :: ESMF_TF_UNKNOWN  = ESMF_Logical(1), &
-                                       ESMF_TF_TRUE     = ESMF_Logical(2), &
-                                       ESMF_TF_FALSE    = ESMF_Logical(3)
+      type(MYESMF_Logical), parameter :: MYESMF_TF_UNKNOWN  = MYESMF_Logical(1), &
+                                       MYESMF_TF_TRUE     = MYESMF_Logical(2), &
+                                       MYESMF_TF_FALSE    = MYESMF_Logical(3)
 
 !------------------------------------------------------------------------------
 !
-      type ESMF_Base
+      type MYESMF_Base
       private
          integer :: ID
          integer :: ref_count
-         type (ESMF_Status) :: base_status
-         character (len=ESMF_MAXSTR) :: name
+         type (MYESMF_Status) :: base_status
+         character (len=MYESMF_MAXSTR) :: name
      end type
 
 ! !PUBLIC TYPES:
 
-      public ESMF_STATE_INVALID
-!      public ESMF_STATE_UNINIT, ESMF_STATE_READY, &
-!             ESMF_STATE_UNALLOCATED, ESMF_STATE_ALLOCATED, &
-!             ESMF_STATE_BUSY
+      public MYESMF_STATE_INVALID
+!      public MYESMF_STATE_UNINIT, MYESMF_STATE_READY, &
+!             MYESMF_STATE_UNALLOCATED, MYESMF_STATE_ALLOCATED, &
+!             MYESMF_STATE_BUSY
 
-      public ESMF_DATA_INTEGER, ESMF_DATA_REAL, &
-             ESMF_DATA_LOGICAL, ESMF_DATA_CHARACTER
+      public MYESMF_DATA_INTEGER, MYESMF_DATA_REAL, &
+             MYESMF_DATA_LOGICAL, MYESMF_DATA_CHARACTER
 
-      public ESMF_KIND_I1, ESMF_KIND_I2, ESMF_KIND_I4, ESMF_KIND_I8, & 
-             ESMF_KIND_R4, ESMF_KIND_R8, ESMF_KIND_C8, ESMF_KIND_C16
+      public MYESMF_KIND_I1, MYESMF_KIND_I2, MYESMF_KIND_I4, MYESMF_KIND_I8, & 
+             MYESMF_KIND_R4, MYESMF_KIND_R8, MYESMF_KIND_C8, MYESMF_KIND_C16
 
-      public ESMF_NULL_POINTER, ESMF_BAD_POINTER
+      public MYESMF_NULL_POINTER, MYESMF_BAD_POINTER
 
 
-      public ESMF_FAILURE, ESMF_SUCCESS
-      public ESMF_MAXSTR
-      public ESMF_MAXDIM, ESMF_MAXDECOMPDIM, ESMF_MAXGRIDDIM
+      public MYESMF_FAILURE, MYESMF_SUCCESS
+      public MYESMF_MAXSTR
+      public MYESMF_MAXDIM, MYESMF_MAXDECOMPDIM, MYESMF_MAXGRIDDIM
      
-      public ESMF_MAJOR_VERSION, ESMF_MINOR_VERSION, ESMF_REVISION
-      public ESMF_VERSION_STRING 
+      public MYESMF_MAJOR_VERSION, MYESMF_MINOR_VERSION, MYESMF_REVISION
+      public MYESMF_VERSION_STRING 
 
-      public ESMF_Status, ESMF_Pointer, ESMF_DataType
-      public ESMF_DataValue, ESMF_Attribute
-!      public ESMF_MemIndex
-!      public ESMF_BasePointer
-      public ESMF_Base
+      public MYESMF_Status, MYESMF_Pointer, MYESMF_DataType
+      public MYESMF_DataValue, MYESMF_Attribute
+!      public MYESMF_MemIndex
+!      public MYESMF_BasePointer
+      public MYESMF_Base
 
-      public ESMF_AxisIndex, ESMF_AxisIndexGet
-!      public ESMF_AxisIndexInit
-      public ESMF_Logical
-!      public ESMF_TF_TRUE, ESMF_TF_FALSE
+      public MYESMF_AxisIndex, MYESMF_AxisIndexGet
+!      public MYESMF_AxisIndexInit
+      public MYESMF_Logical
+!      public MYESMF_TF_TRUE, MYESMF_TF_FALSE
 
 ! !PUBLIC MEMBER FUNCTIONS:
 !
@@ -228,51 +228,51 @@
 !     routines need to be specialized by the higher level objects.
 !
 !   Base class methods
-!      public ESMF_BaseInit
+!      public MYESMF_BaseInit
    
-!      public ESMF_BaseGetConfig
-!      public ESMF_BaseSetConfig
+!      public MYESMF_BaseGetConfig
+!      public MYESMF_BaseSetConfig
 
-!      public ESMF_BaseGetInstCount
+!      public MYESMF_BaseGetInstCount
 
-!      public ESMF_BaseSetID
-!      public ESMF_BaseGetID
+!      public MYESMF_BaseSetID
+!      public MYESMF_BaseGetID
 
-!      public ESMF_BaseSetRefCount
-!      public ESMF_BaseGetRefCount
+!      public MYESMF_BaseSetRefCount
+!      public MYESMF_BaseGetRefCount
 
-!      public ESMF_BaseSetStatus
-!      public ESMF_BaseGetStatus
+!      public MYESMF_BaseSetStatus
+!      public MYESMF_BaseGetStatus
 
 !   Virtual methods to be defined by derived classes
-!      public ESMF_Read
-!      public ESMF_Write
-!      public ESMF_Validate
-!      public ESMF_Print
+!      public MYESMF_Read
+!      public MYESMF_Write
+!      public MYESMF_Validate
+!      public MYESMF_Print
 
 !  Attribute methods
-      public ESMF_AttributeSet
-      public ESMF_AttributeGet
-      public ESMF_AttributeGetCount
-      public ESMF_AttributeGetbyNumber
-      public ESMF_AttributeGetNameList
-      public ESMF_AttributeSetList
-      public ESMF_AttributeGetList
-      public ESMF_AttributeSetObjectList
-      public ESMF_AttributeGetObjectList
-      public ESMF_AttributeCopy
-      public ESMF_AttributeCopyAll
+      public MYESMF_AttributeSet
+      public MYESMF_AttributeGet
+      public MYESMF_AttributeGetCount
+      public MYESMF_AttributeGetbyNumber
+      public MYESMF_AttributeGetNameList
+      public MYESMF_AttributeSetList
+      public MYESMF_AttributeGetList
+      public MYESMF_AttributeSetObjectList
+      public MYESMF_AttributeGetObjectList
+      public MYESMF_AttributeCopy
+      public MYESMF_AttributeCopyAll
  
 !  Misc methods
-      public ESMF_SetName
-      public ESMF_GetName
-      public ESMF_SetPointer
-      public ESMF_SetNullPointer
-      public ESMF_GetPointer
+      public MYESMF_SetName
+      public MYESMF_GetName
+      public MYESMF_SetPointer
+      public MYESMF_SetNullPointer
+      public MYESMF_GetPointer
 
 !  Print methods for calling by higher level print functions
 !  (they have little formatting other than the actual values)
-      public ESMF_StatusString, ESMF_DataTypeString
+      public MYESMF_StatusString, MYESMF_DataTypeString
 
 !  Overloaded = operator functions
       public operator(.eq.), operator(.ne.), assignment(=)
@@ -287,24 +287,24 @@
  
 
 interface operator (.eq.)
- module procedure ESMF_sfeq
- module procedure ESMF_dteq
- module procedure ESMF_pteq
- module procedure ESMF_tfeq
- module procedure ESMF_aieq
+ module procedure MYESMF_sfeq
+ module procedure MYESMF_dteq
+ module procedure MYESMF_pteq
+ module procedure MYESMF_tfeq
+ module procedure MYESMF_aieq
 end interface
 
 interface operator (.ne.)
- module procedure ESMF_sfne
- module procedure ESMF_dtne
- module procedure ESMF_ptne
- module procedure ESMF_tfne
- module procedure ESMF_aine
+ module procedure MYESMF_sfne
+ module procedure MYESMF_dtne
+ module procedure MYESMF_ptne
+ module procedure MYESMF_tfne
+ module procedure MYESMF_aine
 end interface
 
 interface assignment (=)
- module procedure ESMF_dtas
- module procedure ESMF_ptas
+ module procedure MYESMF_dtas
+ module procedure MYESMF_ptas
 end interface
 
 !------------------------------------------------------------------------------
@@ -312,97 +312,97 @@ end interface
       contains
 
 !------------------------------------------------------------------------------
-! function to compare two ESMF_Status flags to see if they're the same or not
+! function to compare two MYESMF_Status flags to see if they're the same or not
 
-function ESMF_sfeq(sf1, sf2)
- logical ESMF_sfeq
- type(ESMF_Status), intent(in) :: sf1, sf2
+function MYESMF_sfeq(sf1, sf2)
+ logical MYESMF_sfeq
+ type(MYESMF_Status), intent(in) :: sf1, sf2
 
- ESMF_sfeq = (sf1%status .eq. sf2%status)
+ MYESMF_sfeq = (sf1%status .eq. sf2%status)
 end function
 
-function ESMF_sfne(sf1, sf2)
- logical ESMF_sfne
- type(ESMF_Status), intent(in) :: sf1, sf2
+function MYESMF_sfne(sf1, sf2)
+ logical MYESMF_sfne
+ type(MYESMF_Status), intent(in) :: sf1, sf2
 
- ESMF_sfne = (sf1%status .ne. sf2%status)
+ MYESMF_sfne = (sf1%status .ne. sf2%status)
 end function
 
 !------------------------------------------------------------------------------
-! function to compare two ESMF_DataTypes to see if they're the same or not
+! function to compare two MYESMF_DataTypes to see if they're the same or not
 
-function ESMF_dteq(dt1, dt2)
- logical ESMF_dteq
- type(ESMF_DataType), intent(in) :: dt1, dt2
+function MYESMF_dteq(dt1, dt2)
+ logical MYESMF_dteq
+ type(MYESMF_DataType), intent(in) :: dt1, dt2
 
- ESMF_dteq = (dt1%dtype .eq. dt2%dtype)
+ MYESMF_dteq = (dt1%dtype .eq. dt2%dtype)
 end function
 
-function ESMF_dtne(dt1, dt2)
- logical ESMF_dtne
- type(ESMF_DataType), intent(in) :: dt1, dt2
+function MYESMF_dtne(dt1, dt2)
+ logical MYESMF_dtne
+ type(MYESMF_DataType), intent(in) :: dt1, dt2
 
- ESMF_dtne = (dt1%dtype .ne. dt2%dtype)
+ MYESMF_dtne = (dt1%dtype .ne. dt2%dtype)
 end function
 
-subroutine ESMF_dtas(intval, dtval)
+subroutine MYESMF_dtas(intval, dtval)
  integer, intent(out) :: intval
- type(ESMF_DataType), intent(in) :: dtval
+ type(MYESMF_DataType), intent(in) :: dtval
 
  intval = dtval%dtype
 end subroutine
 
 
 !------------------------------------------------------------------------------
-! function to compare two ESMF_Pointers to see if they're the same or not
+! function to compare two MYESMF_Pointers to see if they're the same or not
 
-function ESMF_pteq(pt1, pt2)
- logical ESMF_pteq
- type(ESMF_Pointer), intent(in) :: pt1, pt2
+function MYESMF_pteq(pt1, pt2)
+ logical MYESMF_pteq
+ type(MYESMF_Pointer), intent(in) :: pt1, pt2
 
- ESMF_pteq = (pt1%ptr .eq. pt2%ptr)
+ MYESMF_pteq = (pt1%ptr .eq. pt2%ptr)
 end function
 
-function ESMF_ptne(pt1, pt2)
- logical ESMF_ptne
- type(ESMF_Pointer), intent(in) :: pt1, pt2
+function MYESMF_ptne(pt1, pt2)
+ logical MYESMF_ptne
+ type(MYESMF_Pointer), intent(in) :: pt1, pt2
 
- ESMF_ptne = (pt1%ptr .ne. pt2%ptr)
+ MYESMF_ptne = (pt1%ptr .ne. pt2%ptr)
 end function
 
-subroutine ESMF_ptas(ptval, intval)
- type(ESMF_Pointer), intent(out) :: ptval
+subroutine MYESMF_ptas(ptval, intval)
+ type(MYESMF_Pointer), intent(out) :: ptval
  integer, intent(in) :: intval
 
  ptval%ptr = intval
 end subroutine
 
 !------------------------------------------------------------------------------
-! function to compare two ESMF_Logicals to see if they're the same or not
+! function to compare two MYESMF_Logicals to see if they're the same or not
 ! also need assignment to real f90 logical?
 
-function ESMF_tfeq(tf1, tf2)
- logical ESMF_tfeq
- type(ESMF_Logical), intent(in) :: tf1, tf2
+function MYESMF_tfeq(tf1, tf2)
+ logical MYESMF_tfeq
+ type(MYESMF_Logical), intent(in) :: tf1, tf2
 
- ESMF_tfeq = (tf1%value .eq. tf2%value)
+ MYESMF_tfeq = (tf1%value .eq. tf2%value)
 end function
 
-function ESMF_tfne(tf1, tf2)
- logical ESMF_tfne
- type(ESMF_Logical), intent(in) :: tf1, tf2
+function MYESMF_tfne(tf1, tf2)
+ logical MYESMF_tfne
+ type(MYESMF_Logical), intent(in) :: tf1, tf2
 
- ESMF_tfne = (tf1%value .ne. tf2%value)
+ MYESMF_tfne = (tf1%value .ne. tf2%value)
 end function
 
 !------------------------------------------------------------------------------
-! function to compare two ESMF_AxisIndex to see if they're the same or not
+! function to compare two MYESMF_AxisIndex to see if they're the same or not
 
-function ESMF_aieq(ai1, ai2)
- logical ESMF_aieq
- type(ESMF_AxisIndex), intent(in) :: ai1, ai2
+function MYESMF_aieq(ai1, ai2)
+ logical MYESMF_aieq
+ type(MYESMF_AxisIndex), intent(in) :: ai1, ai2
 
- ESMF_aieq = ((ai1%l .eq. ai2%l) .and. &
+ MYESMF_aieq = ((ai1%l .eq. ai2%l) .and. &
               (ai1%r .eq. ai2%r) .and. &
               (ai1%max .eq. ai2%max) .and. &
               (ai1%decomp .eq. ai2%decomp) .and. &
@@ -410,11 +410,11 @@ function ESMF_aieq(ai1, ai2)
 
 end function
 
-function ESMF_aine(ai1, ai2)
- logical ESMF_aine
- type(ESMF_AxisIndex), intent(in) :: ai1, ai2
+function MYESMF_aine(ai1, ai2)
+ logical MYESMF_aine
+ type(MYESMF_AxisIndex), intent(in) :: ai1, ai2
 
- ESMF_aine = ((ai1%l .ne. ai2%l) .or. &
+ MYESMF_aine = ((ai1%l .ne. ai2%l) .or. &
               (ai1%r .ne. ai2%r) .or. &
               (ai1%max .ne. ai2%max) .or. &
               (ai1%decomp .ne. ai2%decomp) .or. &
@@ -430,13 +430,13 @@ end function
 !------------------------------------------------------------------------------
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_BaseInit - initialize a Base object
+! !IROUTINE:  MYESMF_BaseInit - initialize a Base object
 !
 ! !INTERFACE:
-      subroutine ESMF_BaseInit(base, rc)
+      subroutine MYESMF_BaseInit(base, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base) :: base                 
+      type(MYESMF_Base) :: base                 
       integer, intent(out), optional :: rc     
 
 !
@@ -450,7 +450,7 @@ end function
 !           derived types will include a {\tt Base} object as the first
 !           entry.
 !     \item [{[rc]}]
-!           Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!           Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !
 !     \end{description}
 !
@@ -462,28 +462,28 @@ end function
       rcpresent = .FALSE.
       if(present(rc)) then
         rcpresent = .TRUE.
-        rc = ESMF_FAILURE
+        rc = MYESMF_FAILURE
       endif
 
       global_count = global_count + 1
       base%ID = global_count
       base%ref_count = 1
-      base%base_status = ESMF_STATE_READY
+      base%base_status = MYESMF_STATE_READY
       base%name = "undefined"
 
-      if (rcpresent) rc = ESMF_SUCCESS
+      if (rcpresent) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_BaseInit
+      end subroutine MYESMF_BaseInit
 
 !------------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_SetName - set the name of this object
+! !IROUTINE:  MYESMF_SetName - set the name of this object
 !
 ! !INTERFACE:
-      subroutine ESMF_SetName(anytype, name, namespace, rc)
+      subroutine MYESMF_SetName(anytype, name, namespace, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base) :: anytype                 
+      type(MYESMF_Base) :: anytype                 
       character (len = *), intent(in), optional :: name   
       character (len = *), intent(in), optional :: namespace
       integer, intent(out), optional :: rc     
@@ -501,7 +501,7 @@ end function
 !     \item [[name]]
 !           Object name.  An error will be returned if a duplicate name 
 !           is specified.  If a name is not given a unique name will be
-!           generated and can be queried by the {\tt ESMF_GetName} routine.
+!           generated and can be queried by the {\tt MYESMF_GetName} routine.
 !     \item [[namespace]]
 !           Object namespace (e.g. "Application", "Component", "Grid", etc).
 !           If given, the name will be checked that it is unique within
@@ -510,7 +510,7 @@ end function
 !           a default "global" namespace will be assumed and the same rules
 !           for names will be followed.
 !     \item [[rc]]
-!           Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!           Return code; equals {\tt MYESMF\_SUCCESS} if there are no errors.
 !
 !     \end{description}
 !
@@ -520,8 +520,8 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5, FLD1.5.3
       logical :: rcpresent                          ! Return code present   
-      character (len = ESMF_MAXSTR) :: ournamespace ! Namespace if not given
-      character (len = ESMF_MAXSTR) :: defaultname  ! Name if not given
+      character (len = MYESMF_MAXSTR) :: ournamespace ! Namespace if not given
+      character (len = MYESMF_MAXSTR) :: defaultname  ! Name if not given
       integer, save :: seqnum = 0       ! HACK - generate uniq names
                                         ! but not coordinated across procs
 
@@ -529,7 +529,7 @@ end function
       rcpresent = .FALSE.
       if(present(rc)) then
         rcpresent = .TRUE.
-        rc = ESMF_FAILURE
+        rc = MYESMF_FAILURE
       endif
 
 !     ! TODO: this code should generate a unique name if a name
@@ -564,19 +564,19 @@ end function
          anytype%name = defaultname
       endif
 
-      if (rcpresent) rc = ESMF_SUCCESS
+      if (rcpresent) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_SetName
+      end subroutine MYESMF_SetName
 
 !-------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_GetName - get the name of this object
+! !IROUTINE:  MYESMF_GetName - get the name of this object
 !
 ! !INTERFACE:
-      subroutine ESMF_GetName(anytype, name, rc)
+      subroutine MYESMF_GetName(anytype, name, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF object/type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF object/type
       character (len = *), intent(out) :: name           ! object/type name
       integer, intent(out), optional :: rc               ! return code
 
@@ -589,22 +589,22 @@ end function
 ! !REQUIREMENTS:  FLD1.5, FLD1.5.3
 
       name = anytype%name
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_GetName
+      end subroutine MYESMF_GetName
 
 
 !-------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_AttributeSet - set attribute on an ESMF type
+! !IROUTINE:  MYESMF_AttributeSet - set attribute on an MYESMF type
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeSet(anytype, name, value, rc)
+      subroutine MYESMF_AttributeSet(anytype, name, value, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       character (len = *), intent(in) :: name            ! attribute name
-      type(ESMF_DataValue), intent(in) :: value              ! attribute value
+      type(MYESMF_DataValue), intent(in) :: value              ! attribute value
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -615,21 +615,21 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5, FLD1.5.3
 
-      end subroutine ESMF_AttributeSet
+      end subroutine MYESMF_AttributeSet
 
 
 !-------------------------------------------------------------------------
 !BOP
-! !IROUTINE:  ESMF_AttributeGet - get attribute from an ESMF type
+! !IROUTINE:  MYESMF_AttributeGet - get attribute from an MYESMF type
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGet(anytype, name, type, value, rc)
+      subroutine MYESMF_AttributeGet(anytype, name, type, value, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype           ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype           ! any MYESMF type
       character (len = *), intent(in) :: name          ! attribute name
-      type(ESMF_DataType), intent(out) :: type             ! all possible data types
-      type(ESMF_DataValue), intent(out) :: value           ! attribute value
+      type(MYESMF_DataType), intent(out) :: type             ! all possible data types
+      type(MYESMF_DataValue), intent(out) :: value           ! attribute value
       integer, intent(out), optional :: rc             ! return code
 
 !
@@ -639,19 +639,19 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5.1, FLD1.5.3
 
-      end subroutine ESMF_AttributeGet
+      end subroutine MYESMF_AttributeGet
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeGetCount - get an ESMF object's number of attributes
+! !IROUTINE:  MYESMF_AttributeGetCount - get an MYESMF object's number of attributes
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGetCount(anytype, count, rc)
+      subroutine MYESMF_AttributeGetCount(anytype, count, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       integer, intent(out) :: count                      ! attribute count
       integer, intent(out), optional :: rc               ! return code
 
@@ -663,23 +663,23 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.7.5
 
-      end subroutine ESMF_AttributeGetCount
+      end subroutine MYESMF_AttributeGetCount
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeGetbyNumber - get an ESMF object's attribute by num ber
+! !IROUTINE:  MYESMF_AttributeGetbyNumber - get an MYESMF object's attribute by num ber
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGetbyNumber(anytype, number, name, type, value, rc)
+      subroutine MYESMF_AttributeGetbyNumber(anytype, number, name, type, value, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       integer, intent(in) :: number                      ! attribute number
       character (len = *), intent(in) :: name            ! attribute name
-      type(ESMF_DataType), intent(out) :: type               ! all possible data types
-      type(ESMF_DataValue), intent(out) :: value             ! attribute value
+      type(MYESMF_DataType), intent(out) :: type               ! all possible data types
+      type(MYESMF_DataValue), intent(out) :: value             ! attribute value
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -690,19 +690,19 @@ end function
 !EOP
 ! !REQUIREMENTS: 
 
-      end subroutine ESMF_AttributeGetbyNumber
+      end subroutine MYESMF_AttributeGetbyNumber
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-!IROUTINE:  ESMF_AttributeGetNameList - get an ESMF object's attribute name list
+!IROUTINE:  MYESMF_AttributeGetNameList - get an MYESMF object's attribute name list
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGetNameList(anytype, count, namelist, rc)
+      subroutine MYESMF_AttributeGetNameList(anytype, count, namelist, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       integer, intent(out) :: count                      ! attribute count
       character (len = *), dimension (:), intent(out) :: namelist   ! attribute names
       integer, intent(out), optional :: rc               ! return code
@@ -715,22 +715,22 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.7.3
 
-      end subroutine ESMF_AttributeGetNameList
+      end subroutine MYESMF_AttributeGetNameList
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeSetList - set an ESMF object's attributes 
+! !IROUTINE:  MYESMF_AttributeSetList - set an MYESMF object's attributes 
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeSetList(anytype, namelist, valuelist, rc)
+      subroutine MYESMF_AttributeSetList(anytype, namelist, valuelist, rc)
 
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       character (len = *), dimension (:), intent(in) :: namelist    ! attribute names
-      type(ESMF_DataValue), dimension (:), intent(in) :: valuelist      ! attribute values
+      type(MYESMF_DataValue), dimension (:), intent(in) :: valuelist      ! attribute values
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -741,22 +741,22 @@ end function
 !EOP
 ! !REQUIREMENTS:  (none.  added for completeness)
 
-      end subroutine ESMF_AttributeSetList
+      end subroutine MYESMF_AttributeSetList
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeGetList - get an ESMF object's attributes
+! !IROUTINE:  MYESMF_AttributeGetList - get an MYESMF object's attributes
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGetList(anytype, namelist, typelist, valuelist, rc)
+      subroutine MYESMF_AttributeGetList(anytype, namelist, typelist, valuelist, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: anytype             ! any ESMF type
+      type(MYESMF_Base), intent(in) :: anytype             ! any MYESMF type
       character (len = *), dimension (:), intent(in) :: namelist    ! attribute names
-      type(ESMF_DataType), dimension (:), intent(out) :: typelist       ! all possible data types
-      type(ESMF_DataValue), dimension (:), intent(out) :: valuelist     ! attribute values
+      type(MYESMF_DataType), dimension (:), intent(out) :: typelist       ! all possible data types
+      type(MYESMF_DataValue), dimension (:), intent(out) :: valuelist     ! attribute values
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -767,21 +767,21 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.7.4
 
-      end subroutine ESMF_AttributeGetList
+      end subroutine MYESMF_AttributeGetList
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeSetObjectList - set an attribute on multiple ESMF objects 
+! !IROUTINE:  MYESMF_AttributeSetObjectList - set an attribute on multiple MYESMF objects 
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeSetObjectList(anytypelist, name, value, rc)
+      subroutine MYESMF_AttributeSetObjectList(anytypelist, name, value, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), dimension (:), intent(in) :: anytypelist     ! list of any ESMF types
+      type(MYESMF_Base), dimension (:), intent(in) :: anytypelist     ! list of any MYESMF types
       character (len = *), intent(in) :: name            ! attribute name
-      type(ESMF_DataValue), dimension (:), intent(in) :: value          ! attribute value
+      type(MYESMF_DataValue), dimension (:), intent(in) :: value          ! attribute value
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -792,23 +792,23 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5.5 (pri 2)
 
-      end subroutine ESMF_AttributeSetObjectList
+      end subroutine MYESMF_AttributeSetObjectList
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
 !
-! !IROUTINE:  ESMF_AttributeGetObjectList - get an attribute from multiple ESMF objects 
+! !IROUTINE:  MYESMF_AttributeGetObjectList - get an attribute from multiple MYESMF objects 
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeGetObjectList(anytypelist, name, typelist, valuelist, rc)
+      subroutine MYESMF_AttributeGetObjectList(anytypelist, name, typelist, valuelist, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), dimension (:), intent(in) :: anytypelist     ! list of any ESMF types
+      type(MYESMF_Base), dimension (:), intent(in) :: anytypelist     ! list of any MYESMF types
       character (len = *), intent(in) :: name            ! attribute name
-      type(ESMF_DataType), dimension (:), intent(out) :: typelist       ! all possible data types
-      type(ESMF_DataValue), dimension (:), intent(out) :: valuelist     ! attribute values
+      type(MYESMF_DataType), dimension (:), intent(out) :: typelist       ! all possible data types
+      type(MYESMF_DataValue), dimension (:), intent(out) :: valuelist     ! attribute values
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -819,21 +819,21 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5.5 (pri 2)
 
-      end subroutine ESMF_AttributeGetObjectList
+      end subroutine MYESMF_AttributeGetObjectList
 
 
 !-------------------------------------------------------------------------
 !BOP
 !
-! !IROUTINE:  ESMF_AttributeCopy - copy an attribute between two objects
+! !IROUTINE:  MYESMF_AttributeCopy - copy an attribute between two objects
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeCopy(name, source, destination, rc)
+      subroutine MYESMF_AttributeCopy(name, source, destination, rc)
 !
 ! !ARGUMENTS:
       character (len = *), intent(in) :: name            ! attribute name
-      type(ESMF_Base), intent(in) :: source              ! any ESMF type
-      type(ESMF_Base), intent(in) :: destination         ! any ESMF type
+      type(MYESMF_Base), intent(in) :: source              ! any MYESMF type
+      type(MYESMF_Base), intent(in) :: destination         ! any MYESMF type
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -848,7 +848,7 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5.4
 
-      end subroutine ESMF_AttributeCopy
+      end subroutine MYESMF_AttributeCopy
 
 
 !-------------------------------------------------------------------------
@@ -858,11 +858,11 @@ end function
 
 !
 ! !INTERFACE:
-      subroutine ESMF_AttributeCopyAll(source, destination, rc)
+      subroutine MYESMF_AttributeCopyAll(source, destination, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Base), intent(in) :: source              ! any ESMF type
-      type(ESMF_Base), intent(in) :: destination         ! any ESMF type
+      type(MYESMF_Base), intent(in) :: source              ! any MYESMF type
+      type(MYESMF_Base), intent(in) :: destination         ! any MYESMF type
       integer, intent(out), optional :: rc               ! return code
 
 !
@@ -876,7 +876,7 @@ end function
 !EOP
 ! !REQUIREMENTS:  FLD1.5.4
 
-      end subroutine ESMF_AttributeCopyAll
+      end subroutine MYESMF_AttributeCopyAll
 
 !=========================================================================
 ! Misc utility routines, perhaps belongs in a utility file?
@@ -887,10 +887,10 @@ end function
 
 !
 ! !INTERFACE:
-      subroutine ESMF_AxisIndexInit(ai, l, r, max, decomp, gstart, rc)
+      subroutine MYESMF_AxisIndexInit(ai, l, r, max, decomp, gstart, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_AxisIndex), intent(inout) :: ai
+      type(MYESMF_AxisIndex), intent(inout) :: ai
       integer, intent(in) :: l, r, max, decomp, gstart
       integer, intent(out), optional :: rc  
 !
@@ -907,9 +907,9 @@ end function
       ai%decomp = decomp
       ai%gstart = gstart
 
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_AxisIndexInit
+      end subroutine MYESMF_AxisIndexInit
 
 !BOP
 !
@@ -917,10 +917,10 @@ end function
 
 !
 ! !INTERFACE:
-      subroutine ESMF_AxisIndexGet(ai, l, r, max, decomp, gstart, rc)
+      subroutine MYESMF_AxisIndexGet(ai, l, r, max, decomp, gstart, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_AxisIndex), intent(inout) :: ai
+      type(MYESMF_AxisIndex), intent(inout) :: ai
       integer, intent(out), optional :: l, r, max, decomp, gstart
       integer, intent(out), optional :: rc  
 !
@@ -937,22 +937,22 @@ end function
       if (present(decomp)) decomp = ai%decomp
       if (present(gstart)) gstart = ai%gstart
 
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_AxisIndexGet
+      end subroutine MYESMF_AxisIndexGet
 
 !-------------------------------------------------------------------------
 !-------------------------------------------------------------------------
 !BOP
 !
-!IROUTINE:  ESMF_SetPointer - set an opaque value
+!IROUTINE:  MYESMF_SetPointer - set an opaque value
 
 !
 ! !INTERFACE:
-      subroutine ESMF_SetPointer(ptype, contents, rc)
+      subroutine MYESMF_SetPointer(ptype, contents, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Pointer) :: ptype 
+      type(MYESMF_Pointer) :: ptype 
       integer*8, intent(in) :: contents
       integer, intent(out), optional :: rc  
 
@@ -964,21 +964,21 @@ end function
 !EOP
 ! !REQUIREMENTS:
       ptype%ptr = contents
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_SetPointer
+      end subroutine MYESMF_SetPointer
 
 !-------------------------------------------------------------------------
 !BOP
 !
-!IROUTINE:  ESMF_SetNullPointer - set an opaque value
+!IROUTINE:  MYESMF_SetNullPointer - set an opaque value
 
 !
 ! !INTERFACE:
-      subroutine ESMF_SetNullPointer(ptype, rc)
+      subroutine MYESMF_SetNullPointer(ptype, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Pointer) :: ptype 
+      type(MYESMF_Pointer) :: ptype 
       integer, intent(out), optional :: rc  
 
 !
@@ -991,21 +991,21 @@ end function
       integer*8, parameter :: nullp = 0
 
       ptype%ptr = nullp
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_SetNullPointer
+      end subroutine MYESMF_SetNullPointer
 !------------------------------------------------------------------------- 
 !BOP 
-!  !IROUTINE:  ESMF_GetPointer - get an opaque value 
+!  !IROUTINE:  MYESMF_GetPointer - get an opaque value 
 !  
 ! !INTERFACE: 
-      function ESMF_GetPointer(ptype, rc) 
+      function MYESMF_GetPointer(ptype, rc) 
 !
 ! !RETURN VALUE:
-      integer*8 :: ESMF_GetPointer
+      integer*8 :: MYESMF_GetPointer
 
 ! !ARGUMENTS:
-      type(ESMF_Pointer), intent(in) :: ptype 
+      type(MYESMF_Pointer), intent(in) :: ptype 
       integer, intent(out), optional :: rc  
 
 !
@@ -1015,22 +1015,22 @@ end function
 !
 !EOP
 ! !REQUIREMENTS:
-      ESMF_GetPointer = ptype%ptr
-      if (present(rc)) rc = ESMF_SUCCESS
+      MYESMF_GetPointer = ptype%ptr
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end function ESMF_GetPointer
+      end function MYESMF_GetPointer
 
 !------------------------------------------------------------------------- 
 ! misc print routines
 !------------------------------------------------------------------------- 
 !BOP 
-!  !IROUTINE:  ESMF_StatusString - Return status as a string
+!  !IROUTINE:  MYESMF_StatusString - Return status as a string
 !  
 ! !INTERFACE: 
-      subroutine ESMF_StatusString(status, string, rc)
+      subroutine MYESMF_StatusString(status, string, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_Status), intent(in) :: status
+      type(MYESMF_Status), intent(in) :: status
       character(len=*), intent(out) :: string
       integer, intent(out), optional :: rc  
 
@@ -1042,26 +1042,26 @@ end function
 !EOP
 ! !REQUIREMENTS:
 
-      if (status .eq. ESMF_STATE_UNINIT) string = "Uninitialized"
-      if (status .eq. ESMF_STATE_READY) string = "Ready"
-      if (status .eq. ESMF_STATE_UNALLOCATED) string = "Unallocated"
-      if (status .eq. ESMF_STATE_ALLOCATED) string = "Allocated"
-      if (status .eq. ESMF_STATE_BUSY) string = "Busy"
-      if (status .eq. ESMF_STATE_INVALID) string = "Invalid"
+      if (status .eq. MYESMF_STATE_UNINIT) string = "Uninitialized"
+      if (status .eq. MYESMF_STATE_READY) string = "Ready"
+      if (status .eq. MYESMF_STATE_UNALLOCATED) string = "Unallocated"
+      if (status .eq. MYESMF_STATE_ALLOCATED) string = "Allocated"
+      if (status .eq. MYESMF_STATE_BUSY) string = "Busy"
+      if (status .eq. MYESMF_STATE_INVALID) string = "Invalid"
  
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_StatusString
+      end subroutine MYESMF_StatusString
 
 !------------------------------------------------------------------------- 
 !BOP 
-!  !IROUTINE:  ESMF_DataTypeString - Return DataType as a string
+!  !IROUTINE:  MYESMF_DataTypeString - Return DataType as a string
 !  
 ! !INTERFACE: 
-      subroutine ESMF_DataTypeString(datatype, string, rc)
+      subroutine MYESMF_DataTypeString(datatype, string, rc)
 !
 ! !ARGUMENTS:
-      type(ESMF_DataType), intent(in) :: datatype
+      type(MYESMF_DataType), intent(in) :: datatype
       character(len=*), intent(out) :: string
       integer, intent(out), optional :: rc  
 
@@ -1073,14 +1073,14 @@ end function
 !EOP
 ! !REQUIREMENTS:
 
-      if (datatype .eq. ESMF_DATA_INTEGER) string = "Integer"
-      if (datatype .eq. ESMF_DATA_REAL) string = "Real"
-      if (datatype .eq. ESMF_DATA_LOGICAL) string = "Logical"
-      if (datatype .eq. ESMF_DATA_CHARACTER) string = "Character"
+      if (datatype .eq. MYESMF_DATA_INTEGER) string = "Integer"
+      if (datatype .eq. MYESMF_DATA_REAL) string = "Real"
+      if (datatype .eq. MYESMF_DATA_LOGICAL) string = "Logical"
+      if (datatype .eq. MYESMF_DATA_CHARACTER) string = "Character"
  
-      if (present(rc)) rc = ESMF_SUCCESS
+      if (present(rc)) rc = MYESMF_SUCCESS
 
-      end subroutine ESMF_DataTypeString
+      end subroutine MYESMF_DataTypeString
 
 !-------------------------------------------------------------------------
 !
@@ -1089,4 +1089,4 @@ end function
 !  overridden by higher level more specialized functions.
 !-------------------------------------------------------------------------
 
-      end module ESMF_BaseMod
+      end module MYESMF_BaseMod

@@ -33,6 +33,7 @@ MODULES =       module_driver_constants.o  \
 		module_intermediate_nmm.o  \
 		module_cpl.o               \
 		module_cpl_oasis3.o        \
+		module_drv.o               \
 		module_clear_halos.o
 ALOBJS =\
                 module_alloc_space_0.o       \

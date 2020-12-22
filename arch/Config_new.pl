@@ -560,11 +560,11 @@ while ( <CONFIGURE_DEFAULTS> )
         $_ =~ s:CONFIGURE_ESMF_FLAG::g ;
         $_ =~ s:ESMFLIBFLAG::g ;
         if ( $sw_os eq "Interix" ) {
-           $_ =~ s:ESMFIOLIB:\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libesmf_time.a:g ;
-           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libesmf_time.a:g ;
+           $_ =~ s:ESMFIOLIB:\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libmyesmf_time.a:g ;
+           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90/libmyesmf_time.a:g ;
         } else {
-           $_ =~ s:ESMFIOLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lesmf_time:g ;
-           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lesmf_time:g ;
+           $_ =~ s:ESMFIOLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lmyesmf_time:g ;
+           $_ =~ s:ESMFIOEXTLIB:-L\$\(WRF_SRC_ROOT_DIR\)/external/esmf_time_f90 -lmyesmf_time:g ;
         }
       }
      if ( $ENV{HWRF} )
