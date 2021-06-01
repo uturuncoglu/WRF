@@ -19,10 +19,12 @@ MODULE module_drv
 #if ( RWORDSIZE == 8 )
    TYPE IMPORT_FLD
      REAL, ALLOCATABLE, DIMENSION(:,:) :: sst 
+     REAL, ALLOCATABLE, DIMENSION(:,:) :: sic
    END TYPE IMPORT_FLD
 #else
    TYPE IMPORT_FLD
      REAL(kind=8), ALLOCATABLE, DIMENSION(:,:) :: sst    
+     REAL(kind=8), ALLOCATABLE, DIMENSION(:,:) :: sic
    END TYPE IMPORT_FLD
 #endif
 
@@ -51,7 +53,11 @@ CONTAINS
       IF (.NOT. ALLOCATED(wrf_import%sst)) THEN
         ALLOCATE(wrf_import%sst(ips:ipe,jps:jpe))
         wrf_import%sst(ips:ipe,jps:jpe) = 1.0E20
-      END IF 
+      END IF
+      IF (.NOT. ALLOCATED(wrf_import%sic)) THEN
+        ALLOCATE(wrf_import%sic(ips:ipe,jps:jpe))
+        wrf_import%sic(ips:ipe,jps:jpe) = 1.0E20
+      END IF
 #endif 
    END SUBROUTINE drv_allocate
 
